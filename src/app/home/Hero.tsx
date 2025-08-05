@@ -28,7 +28,7 @@ const Hero = () => {
                         <CarouselItem key={index} className='size-full'>
                             <div
                                 style={{ backgroundImage: `url(${url})` }}
-                                className={`container flex size-full w-full items-center bg-cover bg-[0%_28%] bg-no-repeat max-lg:py-14`}>
+                                className={`container flex size-full w-full items-center bg-cover bg-[0%_28%] bg-no-repeat max-lg:py-12`}>
                                 <div className='w-full text-white'>
                                     <h1 className='flex flex-wrap items-center gap-4 text-[45px] md:text-[60px] lg:text-[90px] xl:text-[130px]'>
                                         cripcrop{' '}
