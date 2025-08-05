@@ -14,11 +14,11 @@ const Hero = () => {
         <>
             <Carousel
                 className='relative w-full'
-                plugins={[
-                    Autoplay({
-                        delay: 4000
-                    })
-                ]}
+                // plugins={[
+                //     Autoplay({
+                //         delay: 4000
+                //     })
+                // ]}
                 opts={{
                     align: 'start',
                     loop: true
@@ -29,8 +29,8 @@ const Hero = () => {
                             <div
                                 style={{ backgroundImage: `url(${url})` }}
                                 className={`container flex size-full w-full items-center bg-cover bg-[0%_28%] bg-no-repeat max-lg:py-14`}>
-                                <div className='w-full text-white lg:px-12'>
-                                    <h1 className='flex=wrap flex items-center gap-4 text-[45px] md:text-[70px] lg:text-[100px] xl:text-[150px]'>
+                                <div className='w-full text-white'>
+                                    <h1 className='flex flex-wrap items-center gap-4 text-[45px] md:text-[60px] lg:text-[90px] xl:text-[130px]'>
                                         cripcrop{' '}
                                         <span
                                             style={{

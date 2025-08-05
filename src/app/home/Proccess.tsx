@@ -22,8 +22,8 @@ const Proccess = () => {
                                         <i>
                                             <Calendar size={45} opacity={0.5} />
                                         </i>
-                                        <h2 className='text-xl md:text-2xl xl:text-3xl'>book an appointment</h2>
-                                        <p className=''>
+                                        <h2 className='text-lg md:text-xl xl:text-2xl'>book an appointment</h2>
+                                        <p className='text-sm'>
                                             At imperdiet dui accumsan sit amet nulla risus est ultricies quis.{' '}
                                         </p>
                                     </CardContent>

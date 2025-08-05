@@ -42,8 +42,8 @@ const Cats = () => {
                                             sizes='100'
                                             className='h-[500px] w-full object-cover duration-300 group-hover:scale-110'
                                         />
-                                        <div className='absolute bottom-0 flex h-full w-full flex-col justify-end space-y-3 bg-gradient-to-t from-black via-black/30 to-transparent px-4 py-6 text-start text-white'>
-                                            <h3 className='text-xl md:text-2xl xl:text-3xl'>{cat.title}</h3>
+                                        <div className='absolute bottom-0 flex h-full w-full flex-col justify-end space-y-2 bg-gradient-to-t from-black via-black/30 to-transparent px-4 py-6 text-start text-white'>
+                                            <h3 className='text-lg md:text-xl xl:text-2xl'>{cat.title}</h3>
                                             <Link href={'/shop'} className='block text-white underline'>
                                                 shop now
                                             </Link>
