@@ -65,7 +65,7 @@ const Footer = () => {
 
     return (
         <>
-            <footer className='text-foreground bg-background-secondary relative z-10 py-16'>
+            <footer className='text-foreground bg-background-secondary relative z-10 min-h-[250px] py-16'>
                 <div className='container'>
                     <div className='grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
                         <div className='space-y-2'>
@@ -74,7 +74,8 @@ const Footer = () => {
                                     width={0}
                                     height={0}
                                     loading='eager'
-                                    className='h-full w-full object-contain'
+                                    priority
+                                    className='h-full w-[60px] shrink-0 object-contain md:w-[100px] xl:w-[110px]'
                                     src={'/logo.svg'}
                                     alt='kaira logo'
                                 />
