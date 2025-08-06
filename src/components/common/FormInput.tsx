@@ -29,7 +29,12 @@ const FormInput = ({ name, placeholder, label, type, cx, description }: IProps) 
                     <FormItem>
                         {label && <FormLabel>{label}</FormLabel>}
                         <FormControl>
-                            <Input className={cn('!py-5', cx)} type={type} placeholder={placeholder} {...field} />
+                            <Input
+                                className={cn('bg-background text-foreground rounded-none !py-6', cx)}
+                                type={type}
+                                placeholder={placeholder}
+                                {...field}
+                            />
                         </FormControl>
                         <FormMessage />
                         {description && <FormDescription>{description}</FormDescription>}

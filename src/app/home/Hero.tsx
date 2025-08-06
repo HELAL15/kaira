@@ -14,11 +14,11 @@ const Hero = () => {
         <>
             <Carousel
                 className='relative w-full'
-                // plugins={[
-                //     Autoplay({
-                //         delay: 4000
-                //     })
-                // ]}
+                plugins={[
+                    Autoplay({
+                        delay: 4000
+                    })
+                ]}
                 opts={{
                     align: 'start',
                     loop: true

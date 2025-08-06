@@ -16,8 +16,7 @@ const Proccess = () => {
                                 <Card
                                     key={index}
                                     className='aos-init border-0 bg-transparent px-0 shadow-none'
-                                    data-aos='fade-in'
-                                    data-aos-delay={(index + 1) * 200}>
+                                    data-aos='fade-in'>
                                     <CardContent className='flex flex-col items-center justify-center space-y-2 px-0 text-center'>
                                         <i>
                                             <Calendar size={45} opacity={0.5} />

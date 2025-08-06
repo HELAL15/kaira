@@ -4,7 +4,7 @@ import Link from 'next/link';
 import NavLinks from '../common/NavLinks';
 import { Button } from '../ui/Button';
 import UserDropdown from '../user/UserDropdown';
-import { Menu, Search, UserRound } from 'lucide-react';
+import { Heart, Menu, Search, UserRound } from 'lucide-react';
 
 const Header = () => {
     return (
@@ -27,14 +27,22 @@ const Header = () => {
                     </ul>
                 </nav>
 
-                <div className='flex items-center gap-7'>
-                    <div className='flex items-center gap-5'>
-                        <Link href={'/wishlist'} className='flex items-center gap-2'>
+                <div className='flex items-center gap-4 lg:gap-7'>
+                    <div className='flex items-center gap-3 lg:gap-5'>
+                        <Link href={'/wishlist'} className='flex items-center gap-1 lg:gap-2'>
                             {' '}
-                            <span className='block max-lg:hidden'>wishlist</span> (0)
+                            <span className='block max-lg:hidden'>wishlist</span>{' '}
+                            <i className='hidden max-lg:block'>
+                                <Heart size={18} />
+                            </i>{' '}
+                            (0)
                         </Link>
-                        <Link href={'/cart'} className='flex items-center gap-2'>
-                            <span className='block max-lg:hidden'>cart</span> (0)
+                        <Link href={'/cart'} className='flex items-center gap-1 lg:gap-2'>
+                            <span className='block max-lg:hidden'>cart</span>{' '}
+                            <i className='hidden max-lg:block'>
+                                <Heart size={18} />
+                            </i>{' '}
+                            (0)
                         </Link>
                     </div>
                     <div className='flex items-center gap-5'>

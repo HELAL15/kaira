@@ -18,10 +18,7 @@ const NavLink = ({ href, title }: IProps) => {
         <Link
             href={href}
             title={title}
-            className={cn(
-                'border-b border-transparent pb-2 duration-300',
-                isActive ? 'border-b-foreground' : 'border-transparent'
-            )}>
+            className={cn('border-b border-transparent duration-300', isActive ? 'border-b-foreground' : 'nav-link')}>
             {title}
         </Link>
     );
