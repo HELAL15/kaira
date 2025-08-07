@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
-import path from 'path';
 import fs from 'fs';
-import formidable from 'formidable';
+import path from 'path';
+import { IncomingForm } from 'formidable';
 
 export const config = {
   api: {
@@ -9,46 +9,77 @@ export const config = {
   },
 };
 
-const uploadDir = path.join(process.cwd(), 'public', 'uploads');
+const uploadDir = path.join(process.cwd(), '/public/uploads');
 
-export async function PUT(req: NextRequest, context: { params: { filename: string } }) {
-  const oldFile = context.params.filename;
-  const oldPath = path.join(uploadDir, oldFile);
+// تأكد من وجود مجلد التخزين
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir, { recursive: true });
+}
 
-  // حذف الملف القديم إن وُجد
-  if (fs.existsSync(oldPath)) {
-    fs.unlinkSync(oldPath);
-  }
-
-  const form = formidable({ uploadDir, keepExtensions: true });
+// ⬆️ POST: رفع ملف
+export async function POST(req: NextRequest) {
+  const form = new IncomingForm({ uploadDir, keepExtensions: true });
 
   return new Promise((resolve, reject) => {
     form.parse(req as any, (err, fields, files) => {
       if (err) {
-        reject(NextResponse.json({ error: 'Error parsing form' }, { status: 500 }));
+        reject(NextResponse.json({ error: 'Upload failed' }, { status: 500 }));
         return;
       }
 
-      const file = files.file?.[0] ?? files.file;
+      const file = files.file?.[0];
       if (!file) {
         resolve(NextResponse.json({ error: 'No file uploaded' }, { status: 400 }));
         return;
       }
 
-      const filename = path.basename(Array.isArray(file) ? file[0].filepath : file.filepath);
-      resolve(NextResponse.json({ filename, url: `/uploads/${filename}` }, { status: 200 }));
+      const filename = path.basename(file.filepath);
+      resolve(NextResponse.json({ filename, url: `/uploads/${filename}` }));
     });
   });
 }
 
-export async function DELETE(_: NextRequest, context: { params: { filename: string } }) {
-  const fileToDelete = context.params.filename;
-  const filePath = path.join(uploadDir, fileToDelete);
+// 🆕 PUT: تحديث الملف
+export async function PUT(req: NextRequest, { params }: { params: { filename: string } }) {
+  const { filename } = params;
+  const oldPath = path.join(uploadDir, filename);
+
+  // حذف الملف القديم
+  if (fs.existsSync(oldPath)) {
+    fs.unlinkSync(oldPath);
+  }
+
+  // رفع الجديد
+  const form = new IncomingForm({ uploadDir, keepExtensions: true });
+
+  return new Promise((resolve, reject) => {
+    form.parse(req as any, (err, fields, files) => {
+      if (err) {
+        reject(NextResponse.json({ error: 'Update failed' }, { status: 500 }));
+        return;
+      }
+
+      const file = files.file?.[0];
+      if (!file) {
+        resolve(NextResponse.json({ error: 'No file uploaded' }, { status: 400 }));
+        return;
+      }
+
+      const newFilename = path.basename(file.filepath);
+      resolve(NextResponse.json({ filename: newFilename, url: `/uploads/${newFilename}` }));
+    });
+  });
+}
+
+// ❌ DELETE: حذف الملف
+export async function DELETE(_: NextRequest, { params }: { params: { filename: string } }) {
+  const { filename } = params;
+  const filePath = path.join(uploadDir, filename);
 
   if (!fs.existsSync(filePath)) {
     return NextResponse.json({ error: 'File not found' }, { status: 404 });
   }
 
   fs.unlinkSync(filePath);
-  return NextResponse.json({ message: 'File deleted successfully' }, { status: 200 });
+  return NextResponse.json({ message: 'File deleted successfully' });
 }
