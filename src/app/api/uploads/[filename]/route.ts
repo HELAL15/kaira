@@ -1,62 +1,54 @@
 import { NextRequest, NextResponse } from 'next/server';
-import fs from 'fs/promises';
 import path from 'path';
+import fs from 'fs';
+import formidable from 'formidable';
 
-// حذف ملف
-export async function DELETE(
-  req: NextRequest,
-  context: { params: { filename: string } }
-) {
-  const { filename } = context.params;
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
 
-  const filePath = path.join(process.cwd(), 'public', 'uploads', filename);
+const uploadDir = path.join(process.cwd(), 'public', 'uploads');
 
-  try {
-    await fs.unlink(filePath);
-    return NextResponse.json({ message: 'File deleted successfully' });
-  } catch (error) {
-    return NextResponse.json(
-      { error: 'File not found or cannot delete' },
-      { status: 404 }
-    );
+export async function PUT(req: NextRequest, context: { params: { filename: string } }) {
+  const oldFile = context.params.filename;
+  const oldPath = path.join(uploadDir, oldFile);
+
+  // حذف الملف القديم إن وُجد
+  if (fs.existsSync(oldPath)) {
+    fs.unlinkSync(oldPath);
   }
+
+  const form = formidable({ uploadDir, keepExtensions: true });
+
+  return new Promise((resolve, reject) => {
+    form.parse(req as any, (err, fields, files) => {
+      if (err) {
+        reject(NextResponse.json({ error: 'Error parsing form' }, { status: 500 }));
+        return;
+      }
+
+      const file = files.file?.[0] ?? files.file;
+      if (!file) {
+        resolve(NextResponse.json({ error: 'No file uploaded' }, { status: 400 }));
+        return;
+      }
+
+      const filename = path.basename(Array.isArray(file) ? file[0].filepath : file.filepath);
+      resolve(NextResponse.json({ filename, url: `/uploads/${filename}` }, { status: 200 }));
+    });
+  });
 }
 
-// تحديث ملف (إزالة القديم ثم حفظ الجديد)
-export async function PUT(
-  req: NextRequest,
-  context: { params: { filename: string } }
-) {
-  const { filename } = context.params;
-  const formData = await req.formData();
-  const newFile = formData.get('file') as File | null;
+export async function DELETE(_: NextRequest, context: { params: { filename: string } }) {
+  const fileToDelete = context.params.filename;
+  const filePath = path.join(uploadDir, fileToDelete);
 
-  if (!newFile) {
-    return NextResponse.json(
-      { error: 'No file provided' },
-      { status: 400 }
-    );
+  if (!fs.existsSync(filePath)) {
+    return NextResponse.json({ error: 'File not found' }, { status: 404 });
   }
 
-  const bytes = await newFile.arrayBuffer();
-  const buffer = Buffer.from(bytes);
-  const filePath = path.join(process.cwd(), 'public', 'uploads', filename);
-
-  try {
-    // حذف الملف القديم إن وُجد
-    await fs.unlink(filePath).catch(() => {}); // تجاهل الخطأ إذا لم يكن موجودًا
-
-    // كتابة الملف الجديد
-    await fs.writeFile(filePath, buffer);
-
-    return NextResponse.json({
-      message: 'File updated successfully',
-      url: `/uploads/${filename}`,
-    });
-  } catch (error) {
-    return NextResponse.json(
-      { error: 'Error updating file or file not found' },
-      { status: 500 }
-    );
-  }
+  fs.unlinkSync(filePath);
+  return NextResponse.json({ message: 'File deleted successfully' }, { status: 200 });
 }
