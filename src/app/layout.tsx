@@ -8,7 +8,8 @@ import AppProvider from '@/providers/AppProvider';
 import { Analytics } from '@vercel/analytics/next';
 
 import 'aos/dist/aos.css';
-import { getLocale } from 'next-intl/server';
+
+// import { getLocale } from 'next-intl/server';
 
 export const metadata: Metadata = {
     title: 'Kaira - home',
@@ -28,12 +29,12 @@ export const metadata: Metadata = {
 //     variable: '--font-marcellus'
 // });
 
-const Layout = async ({ children }: Readonly<{ children: ReactNode }>) => {
-    const locale = await getLocale();
-    const dir = locale === 'ar' ? 'rtl' : 'ltr';
+const Layout = ({ children }: Readonly<{ children: ReactNode }>) => {
+    // const locale = await getLocale();
+    // const dir = locale === 'ar' ? 'rtl' : 'ltr';
 
     return (
-        <html suppressHydrationWarning lang={locale} dir={dir}>
+        <html suppressHydrationWarning lang={'en'} dir={'ltr'}>
             <body className={`bg-background !text-foreground relative overflow-x-clip antialiased`}>
                 <AppProvider>
                     {children}

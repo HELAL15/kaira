@@ -25,5 +25,6 @@ const nextConfig: NextConfig = {
   },
 };
 
-const withNextIntl = createNextIntlPlugin();
-export default withNextIntl(nextConfig);
+// const withNextIntl = createNextIntlPlugin();
+// export default withNextIntl(nextConfig);
+export default nextConfig;
