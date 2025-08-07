@@ -42,7 +42,7 @@ const SignUpNewsletter = () => {
         <>
             <section
                 style={{
-                    backgroundImage: 'url(/images/video-image.jpg)'
+                    backgroundImage: 'url(/images/video-image.webp)'
                 }}
                 className='open-up aos-init relative flex w-full items-center overflow-hidden bg-cover bg-fixed bg-center bg-no-repeat p-0 py-32'
                 // data-aos='zoom-out'

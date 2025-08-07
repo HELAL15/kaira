@@ -89,7 +89,7 @@ export default function Story() {
                         </DialogContent>
                     </Dialog>
                     <img
-                        src='/images/video-image.jpg'
+                        src='/images/video-image.webp'
                         alt='Poster'
                         className={cn('h-full w-full object-cover', !isPaused && 'hidden')}
                     />

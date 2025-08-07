@@ -5,9 +5,23 @@ import createNextIntlPlugin from 'next-intl/plugin';
 const nextConfig: NextConfig = {
   images: {
     domains: ['localhost:3000'],
+    formats: ['image/avif', 'image/webp']
   },
   eslint: {
     ignoreDuringBuilds: true, // Disable ESLint during builds
+  },
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=3600, stale-while-revalidate=59', 
+          },
+        ],
+      },
+    ];
   },
 };
 
