@@ -8,7 +8,7 @@ import { Calendar } from 'lucide-react';
 const Proccess = () => {
     return (
         <>
-            <section className='bg-background open-up aos-init' data-aos='zoom-out'>
+            <section className='bg-background'>
                 <AnimateAOS>
                     <div className='container py-8'>
                         <div className='grid grid-cols-1 gap-7 md:grid-cols-2 lg:grid-cols-4'>

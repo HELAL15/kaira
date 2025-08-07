@@ -2,16 +2,15 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import NavLinks from '../common/NavLinks';
-import ThemeSwitch from '../common/ThemeSwitch';
+import SocialLinks from '../common/SocialLinks';
 import NavLink from '../ui/NavLink';
-import { Facebook, Instagram, Twitter, Youtube } from 'lucide-react';
 
 const Footer = () => {
     const helpLinks = [
         {
             id: 1,
             title: 'track your order',
-            href: '/track-order'
+            href: '/order-tracking'
         },
         {
             id: 2,
@@ -40,29 +39,6 @@ const Footer = () => {
         }
     ];
 
-    const social = [
-        {
-            id: 1,
-            icon: <Facebook />,
-            href: 'https://www.facebook.com'
-        },
-        {
-            id: 2,
-            icon: <Twitter />,
-            href: 'https://www.x.com'
-        },
-        {
-            id: 3,
-            icon: <Youtube />,
-            href: 'https://www.youtube.com'
-        },
-        {
-            id: 4,
-            icon: <Instagram />,
-            href: 'https://www.instagram.com'
-        }
-    ];
-
     return (
         <>
             <footer className='text-foreground bg-background relative z-10 min-h-[250px] py-16'>
@@ -84,17 +60,7 @@ const Footer = () => {
                                 Gravida massa volutpat aenean odio. Amet, turpis erat nullam fringilla elementum diam
                                 in. Nisi, purus vitae, ultrices nunc. Sit ac sit suscipit hendrerit.
                             </p>
-                            <div className='flex items-center gap-4'>
-                                {social.map((item) => (
-                                    <Link
-                                        key={item.id}
-                                        href={item.href as string}
-                                        aria-label={item.href as string}
-                                        className='text-gray hover:text-foreground transition-colors'>
-                                        <i>{item.icon}</i>
-                                    </Link>
-                                ))}
-                            </div>
+                            <SocialLinks />
                         </div>
                         <div className='space-y-4'>
                             <span className='font-marcellus block text-2xl font-semibold uppercase'>quick links</span>

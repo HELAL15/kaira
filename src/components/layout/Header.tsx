@@ -9,12 +9,12 @@ const Header = () => {
     return (
         <header className='bg-background-secondary text-foreground sticky top-0 z-50 border-b border-b-white py-4'>
             <div className='container flex w-full items-center justify-between gap-6'>
-                <Link href={'/'} className='max-md:max-h-[35px]'>
+                <Link aria-label='kaira website logo' href={'/'} className='max-md:max-h-[35px]'>
                     <Image
                         width={0}
                         height={0}
                         loading='eager'
-                        aria-label='logo'
+                        priority
                         className='h-full w-full object-contain'
                         src={'/logo.svg'}
                         alt='kaira logo'
@@ -62,7 +62,7 @@ const Header = () => {
                                 <Search className='size-[18px] md:size-[20px]' />
                             </i>
                         </Button>
-                        <Button title='menu' variant={'ghost'} className='hidden cursor-pointer p-0 max-lg:block'>
+                        <Button title='menu' variant={'ghost'} className='p-0 lg:hidden'>
                             <i>
                                 <Menu className='size-[18px] md:size-[20px]' />
                             </i>

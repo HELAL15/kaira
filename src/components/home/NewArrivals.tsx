@@ -7,9 +7,15 @@ import { items } from '@/constants/data';
 const NewArrivals = () => {
     return (
         <>
-            <section data-aos='zoom-out' className='open-up aos-init'>
-                <div className='container'>
-                    <Heading title='our new arrivals' />
+            <section>
+                <div data-aos='zoom-out' className='open-up aos-init container'>
+                    <Heading
+                        title='our new arrivals'
+                        link={{
+                            href: '/products',
+                            desc: 'view all products'
+                        }}
+                    />
                     <SwiperContainer items={items} />
                 </div>
             </section>

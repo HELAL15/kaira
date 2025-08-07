@@ -4,6 +4,7 @@ import { cn } from '@/lib/utils';
 
 import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '../ui/form';
 import { Input } from '../ui/input';
+import { Textarea } from '../ui/textarea';
 import { type Control, useFormContext } from 'react-hook-form';
 
 interface IProps {
@@ -29,12 +30,24 @@ const FormInput = ({ name, placeholder, label, type, cx, description }: IProps) 
                     <FormItem>
                         {label && <FormLabel>{label}</FormLabel>}
                         <FormControl>
-                            <Input
-                                className={cn('bg-background text-foreground rounded-none !py-6', cx)}
-                                type={type}
-                                placeholder={placeholder}
-                                {...field}
-                            />
+                            {type === 'textarea' ? (
+                                <Textarea
+                                    rows={6}
+                                    className={cn(
+                                        'bg-background text-foreground field-sizing-fixed w-full rounded-none !py-6',
+                                        cx
+                                    )}
+                                    placeholder={placeholder}
+                                    {...field}
+                                />
+                            ) : (
+                                <Input
+                                    className={cn('bg-background text-foreground w-full rounded-none !py-6', cx)}
+                                    type={type}
+                                    placeholder={placeholder}
+                                    {...field}
+                                />
+                            )}
                         </FormControl>
                         <FormMessage />
                         {description && <FormDescription>{description}</FormDescription>}

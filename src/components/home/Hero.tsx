@@ -1,14 +1,15 @@
-// 'use client';
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 
 import { Button } from '@/components/ui/Button';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 
-// import Autoplay from 'embla-carousel-autoplay';
+import Autoplay from 'embla-carousel-autoplay';
 
 const Hero = () => {
-    const url = '/images/hero4.jpg';
+    // const url = '/images/hero4.jpg';
 
     const data = [
         {
@@ -40,12 +41,12 @@ const Hero = () => {
     return (
         <>
             <Carousel
-                className='relative w-full'
-                // plugins={[
-                //     Autoplay({
-                //         delay: 4000
-                //     })
-                // ]}
+                className='relative w-full max-lg:min-h-[250px]'
+                plugins={[
+                    Autoplay({
+                        delay: 4000
+                    })
+                ]}
                 opts={{
                     align: 'start',
                     loop: true
@@ -61,13 +62,13 @@ const Hero = () => {
                                 fill
                                 sizes='100vw'
                                 priority
-                                className='absolute inset-0 z-0 size-full object-cover object-center'
+                                className='absolute inset-0 z-0 size-full object-cover'
                             />
                             <div
                                 // style={{ backgroundImage: `url(${url})` }}
                                 className={`t relative z-10 container flex size-full w-full items-center max-lg:py-12`}>
                                 <div className='w-full text-white'>
-                                    <h1 className='font-marcellus flex flex-wrap items-center gap-3 text-[35px] md:text-[50px] lg:text-[80px] xl:text-[90px]'>
+                                    <h1 className='font-marcellus flex items-center gap-3 text-[30px] md:text-[45px] lg:text-[80px] xl:text-[90px]'>
                                         {/* cripcrop{' '}
                                         <span
                                             style={{
@@ -90,7 +91,7 @@ const Hero = () => {
                                         ))}
                                     </h1>
                                     <div className='space-y-6'>
-                                        <p className='text-background-secondary max-w-[700px] md:text-lg'>
+                                        <p className='text-background-secondary max-w-[700px] text-sm md:text-lg'>
                                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos soluta
                                             veritatis molestias nisi, sunt earum beatae suscipit? A, accusamus quam!
                                         </p>

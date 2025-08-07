@@ -25,12 +25,12 @@
 
     @variant md {
         max-width: 100%;
-        padding-inline: 3rem;
+        padding-inline: 2rem;
     }
 
     @variant lg {
         max-width: 100%;
-        padding-inline: 5rem;
+        padding-inline: 4.5rem;
     }
 
     @variant xl {
@@ -50,6 +50,7 @@
     --gray:#8f8f8f;
     --background: oklch(1 0 0);
     --background-secondary: oklch(0.9635 0.0026 124.2);
+    --color-secondary: #8C907E;
     --foreground: oklch(0.145 0 0);
     --card: oklch(1 0 0);
     --card-foreground: oklch(0.145 0 0);
@@ -168,7 +169,7 @@
     --color-popover-foreground: var(--popover-foreground);
     --color-primary: var(--primary);
     --color-primary-foreground: var(--primary-foreground);
-    --color-secondary: var(--secondary);
+    --color-secondary: var(--color-secondary);
     --color-secondary-foreground: var(--secondary-foreground);
     --color-muted: var(--muted);
     --color-muted-foreground: var(--muted-foreground);
@@ -204,8 +205,12 @@
         @apply py-6;
     }
 
+    main{
+        @apply overflow-hidden;
+    }
+
     h1,h2,h3,h4,h5,h6 {
-        @apply !font-marcellus;
+        @apply !font-marcellus text-foreground;
     }
 
 
@@ -230,6 +235,11 @@
         -webkit-animation: 1s open-up forwards;
                 animation: 1s open-up forwards;
     }
+
+    .animate-spin-slow {
+        -webkit-animation: spin 20s linear infinite;
+                animation: spin 20s linear infinite;
+      }
 }
 
 
@@ -256,6 +266,23 @@
     }
 }
 
+@-webkit-keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+@keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
 
 #nprogress {
     z-index: 9999999999 !important;

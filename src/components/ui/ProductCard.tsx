@@ -24,8 +24,8 @@ const ProductCard = ({ product, delay }: { product?: FieldValues; delay?: number
                         sizes='100'
                         className='h-[250px] w-full object-cover duration-300 group-hover:scale-110 md:h-[390px] lg:h-[400px]'
                     />
-                    <div className='absolute -bottom-full flex w-full flex-wrap items-center justify-center gap-4 space-y-2 px-4 py-6 text-start text-white duration-300 group-hover:bottom-0'>
-                        <Button title='add to cart' className='m-0 px-6 uppercase'>
+                    <div className='absolute -bottom-full flex w-full flex-wrap items-center justify-center gap-3 space-y-2 px-3 py-6 text-start text-white duration-300 group-hover:bottom-0'>
+                        <Button title='add to cart' className='m-0 px-5 uppercase'>
                             add to cart
                         </Button>
                         <Button title='add to wishlist' className='m-0 size-10 rounded-full'>
