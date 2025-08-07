@@ -7,7 +7,7 @@ import { items } from '@/constants/data';
 const BestSelling = () => {
     return (
         <>
-            <section className='bg-background-secondary'>
+            <section className='bg-background-secondary open-up aos-init' data-aos='zoom-out'>
                 <div className='container'>
                     <Heading title='best selling items' />
                     <SwiperContainer items={items} />

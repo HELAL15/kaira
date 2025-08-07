@@ -25,13 +25,15 @@ const ProductCard = ({ product, delay }: { product?: FieldValues; delay?: number
                         className='h-[250px] w-full object-cover duration-300 group-hover:scale-110 md:h-[390px] lg:h-[400px]'
                     />
                     <div className='absolute -bottom-full flex w-full flex-wrap items-center justify-center gap-4 space-y-2 px-4 py-6 text-start text-white duration-300 group-hover:bottom-0'>
-                        <Button className='m-0 px-6 uppercase'>add to cart</Button>
-                        <Button className='m-0 size-10 rounded-full'>
+                        <Button title='add to cart' className='m-0 px-6 uppercase'>
+                            add to cart
+                        </Button>
+                        <Button title='add to wishlist' className='m-0 size-10 rounded-full'>
                             <i>
                                 <Heart />
                             </i>
                         </Button>
-                        <Button className='m-0 size-10 rounded-full'>
+                        <Button title='watch' className='m-0 size-10 rounded-full'>
                             <i>
                                 <Eye />
                             </i>
@@ -39,7 +41,10 @@ const ProductCard = ({ product, delay }: { product?: FieldValues; delay?: number
                     </div>
                 </CardContent>
                 <CardFooter className='m-0 flex flex-col items-start gap-2 p-0'>
-                    <Link href={'/shop/1'} className='hovered-underlined font-marcellus text-lg uppercase'>
+                    <Link
+                        aria-label={title}
+                        href={'/shop/1'}
+                        className='hovered-underlined font-marcellus text-lg uppercase'>
                         {title || 'Product Title'}
                     </Link>
                     <p className='text-gray'>$ {price || '54.00'} </p>

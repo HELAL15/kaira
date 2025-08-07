@@ -64,8 +64,10 @@ const Cats = () => {
                             <CarouselContent className='flex-shrink-0 flex-grow-0'>
                                 {data.map((cat, index) => (
                                     <CarouselItem key={index} className='pl-4 md:basis-1/2 lg:basis-1/3'>
-                                        <Card key={index} className='border-0 bg-transparent p-0 shadow-none'>
-                                            <CardContent className='group relative overflow-hidden p-0'>
+                                        <Card
+                                            key={index}
+                                            className='cursor-pointer border-0 bg-transparent p-0 shadow-none'>
+                                            <CardContent className='group relative overflow-hidden p-0 duration-300 hover:scale-[.98]'>
                                                 <Image
                                                     src={cat?.img || ''}
                                                     alt={cat.title}

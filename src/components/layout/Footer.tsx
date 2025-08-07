@@ -65,7 +65,7 @@ const Footer = () => {
 
     return (
         <>
-            <footer className='text-foreground bg-background-secondary relative z-10 min-h-[250px] py-16'>
+            <footer className='text-foreground bg-background relative z-10 min-h-[250px] py-16'>
                 <div className='container'>
                     <div className='grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
                         <div className='space-y-2'>
@@ -80,7 +80,7 @@ const Footer = () => {
                                     alt='kaira logo'
                                 />
                             </Link>
-                            <p className='text-foreground/60'>
+                            <p className='text-gray-700'>
                                 Gravida massa volutpat aenean odio. Amet, turpis erat nullam fringilla elementum diam
                                 in. Nisi, purus vitae, ultrices nunc. Sit ac sit suscipit hendrerit.
                             </p>
@@ -89,7 +89,8 @@ const Footer = () => {
                                     <Link
                                         key={item.id}
                                         href={item.href as string}
-                                        className='text-foreground/60 hover:text-foreground transition-colors'>
+                                        aria-label={item.href as string}
+                                        className='text-gray hover:text-foreground transition-colors'>
                                         <i>{item.icon}</i>
                                     </Link>
                                 ))}
@@ -105,17 +106,20 @@ const Footer = () => {
                             <span className='font-marcellus block text-2xl font-semibold uppercase'>help & info</span>
                             <ul className='space-y-2 uppercase'>
                                 {helpLinks.map((link) => (
-                                    <NavLink key={link.id} href={link.href} title={link.title} />
+                                    <li key={link.id}>
+                                        <NavLink href={link.href} title={link.title} />
+                                    </li>
                                 ))}
                             </ul>
                         </div>
                         <div className='space-y-4'>
                             <span className='font-marcellus block text-2xl font-semibold uppercase'>contact us</span>
-                            <ul className='space-y-4'>
+                            <ul className='space-y-4 text-gray-700'>
                                 <li>
                                     <address className='space-y-1 *:block'>
-                                        <p className='text-gray'>Do you have any questions or suggestions?</p>
+                                        <p className=''>Do you have any questions or suggestions?</p>
                                         <Link
+                                            aria-label='email'
                                             href={'mailto:1ahmedhelal1@gmail.com'}
                                             className='text-foreground nav-link'>
                                             contact@yourcompany.com
@@ -124,8 +128,11 @@ const Footer = () => {
                                 </li>
                                 <li>
                                     <div className='space-y-1'>
-                                        <p className='text-gray'>Do you need support? Give us a call.</p>
-                                        <Link href={'tel:01551610991'} className='text-foreground nav-link'>
+                                        <p className=''>Do you need support? Give us a call.</p>
+                                        <Link
+                                            aria-label='mobile'
+                                            href={'tel:01551610991'}
+                                            className='text-foreground nav-link'>
                                             +43 720 115 278
                                         </Link>
                                     </div>

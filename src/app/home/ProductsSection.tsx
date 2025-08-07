@@ -7,7 +7,7 @@ import { items } from '@/constants/data';
 const ProductsSection = () => {
     return (
         <>
-            <section>
+            <section data-aos='zoom-out' className='open-up aos-init'>
                 <div className='container'>
                     <Heading title='our products' />
                     <div className='grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-4 xl:gap-6'>

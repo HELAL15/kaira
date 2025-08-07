@@ -18,6 +18,7 @@ const NavLink = ({ href, title }: IProps) => {
         <Link
             href={href}
             title={title}
+            aria-label={title}
             className={cn('border-b border-transparent duration-300', isActive ? 'border-b-foreground' : 'nav-link')}>
             {title}
         </Link>

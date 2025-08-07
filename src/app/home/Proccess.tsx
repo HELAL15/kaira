@@ -8,7 +8,7 @@ import { Calendar } from 'lucide-react';
 const Proccess = () => {
     return (
         <>
-            <section className='bg-background'>
+            <section className='bg-background open-up aos-init' data-aos='zoom-out'>
                 <AnimateAOS>
                     <div className='container py-8'>
                         <div className='grid grid-cols-1 gap-7 md:grid-cols-2 lg:grid-cols-4'>
@@ -22,7 +22,7 @@ const Proccess = () => {
                                             <Calendar size={45} opacity={0.5} />
                                         </i>
                                         <h2 className='text-lg md:text-xl xl:text-2xl'>book an appointment</h2>
-                                        <p className='text-sm'>
+                                        <p className='text-gray text-sm'>
                                             At imperdiet dui accumsan sit amet nulla risus est ultricies quis.{' '}
                                         </p>
                                     </CardContent>

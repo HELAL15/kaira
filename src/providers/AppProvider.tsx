@@ -1,15 +1,16 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, lazy } from 'react';
 
 // import { ThemeProvider } from 'next-themes';
 
 import '@/app/globals.css';
-import Footer from '@/components/layout/Footer';
 import Header from '@/components/layout/Header';
 
 import ReactQueryProvider from './ReactQueryProcider';
 import { NextIntlClientProvider } from 'next-intl';
 import NextTopLoader from 'nextjs-toploader';
 import { Toaster } from 'sonner';
+
+const Footer = lazy(() => import('@/components/layout/Footer'));
 
 const AppProvider = ({ children }: { children: ReactNode }) => {
     return (

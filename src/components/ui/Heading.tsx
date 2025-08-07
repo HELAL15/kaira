@@ -12,7 +12,7 @@ const Heading = ({
     return (
         <>
             <div className='flex items-center justify-between gap-4 py-6'>
-                <h2 className='text-lg uppercase md:text-xl lg:text-2xl'>{title}</h2>
+                <h2 className='text-foreground text-lg uppercase md:text-xl lg:text-2xl'>{title}</h2>
                 <Link href={link.href as string} className='text-foreground hovered-underlined md:text-lg lg:text-xl'>
                     {link.desc}
                 </Link>

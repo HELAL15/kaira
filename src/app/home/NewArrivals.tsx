@@ -7,7 +7,7 @@ import { items } from '@/constants/data';
 const NewArrivals = () => {
     return (
         <>
-            <section>
+            <section data-aos='zoom-out' className='open-up aos-init'>
                 <div className='container'>
                     <Heading title='our new arrivals' />
                     <SwiperContainer items={items} />
