@@ -1,10 +1,9 @@
-import Image from 'next/image';
-
+import ApplyCopoun from '@/components/cart/ApplyCopoun';
+import ProductCart from '@/components/cart/ProductCart';
+import ShippingForm from '@/components/cart/ShippingForm';
 import SectionHeading from '@/components/common/SectionHeading';
+import SignUpNewsletter from '@/components/common/SignUpNewsletter';
 import { Button } from '@/components/ui/Button';
-import { Input } from '@/components/ui/input';
-
-import { Minus, Plus, X } from 'lucide-react';
 
 const page = () => {
     return (
@@ -14,8 +13,10 @@ const page = () => {
                 <section>
                     <div className='container py-8'>
                         {/* Header */}
-                        <div className='mb-6 grid grid-cols-12 gap-4 border-b border-gray-200 pb-4 max-md:hidden'>
-                            <div className='text-secondary col-span-5 font-medium tracking-wide uppercase'>PRODUCT</div>
+                        <div className='mb-6 grid grid-cols-12 gap-4 border-b border-gray-200 pb-4 text-center max-md:hidden'>
+                            <div className='text-secondary col-span-5 text-start font-medium tracking-wide uppercase'>
+                                PRODUCT
+                            </div>
                             <div className='text-secondary col-span-2 text-center font-medium tracking-wide uppercase'>
                                 UNIT PRICE
                             </div>
@@ -29,119 +30,61 @@ const page = () => {
                         </div>
 
                         {/* Cart Items */}
-                        <div className='divide-background-secondary w-full divide-y'>
+                        <ul className='divide-background-secondary w-full divide-y'>
                             {Array.from({ length: 4 }).map((_, index) => (
-                                <div key={index} className='grid grid-cols-12 items-center gap-4 py-6'>
-                                    <div className='col-span-full flex items-center gap-4 md:col-span-5'>
-                                        <div className='h-20 w-20 flex-shrink-0 overflow-hidden rounded bg-gray-100'>
-                                            <Image
-                                                src='/images/cat-item1.jpg'
-                                                alt='Handmade Crop Sweater'
-                                                width={80}
-                                                height={80}
-                                                className='h-full w-full object-cover'
-                                            />
-                                        </div>
-                                        <div>
-                                            <h3 className='text-foreground text-lg tracking-wide uppercase'>
-                                                HANDMADE CROP SWEATER
-                                            </h3>
-                                        </div>
-                                    </div>
-                                    <div className='col-span-3 text-center md:col-span-2'>
-                                        <span className='font-medium'>$54.00</span>
-                                    </div>
-                                    {/* Quantity Controls */}
-                                    <div className='col-span-5 flex items-center justify-center md:col-span-2'>
-                                        <div className='flex items-center rounded border border-gray-200'>
-                                            <Button variant='ghost' size='sm' className='h-8 w-8 p-0 hover:bg-gray-100'>
-                                                <Minus className='h-3 w-3' />
-                                            </Button>
-                                            <Input
-                                                type='number'
-                                                value='1'
-                                                className='h-8 w-12 border-0 text-center focus:border-0 focus:ring-0'
-                                                readOnly
-                                            />
-                                            <Button variant='ghost' size='sm' className='h-8 w-8 p-0 hover:bg-gray-100'>
-                                                <Plus className='h-3 w-3' />
-                                            </Button>
-                                        </div>
-                                    </div>
-
-                                    {/* Total */}
-                                    <div className='col-span-3 text-center md:col-span-2'>
-                                        <span className='font-medium text-gray-900'>$54.00</span>
-                                    </div>
-
-                                    {/* Remove Button */}
-                                    <div className='col-span-1 flex justify-center max-md:order-2'>
-                                        <Button variant='ghost' size='sm' className='h-8 w-8 p-0 hover:bg-gray-100'>
-                                            <X className='h-4 w-4 text-gray-400' />
-                                        </Button>
-                                    </div>
-                                </div>
+                                <li key={index}>
+                                    <ProductCart />
+                                </li>
                             ))}
+                            <li>
+                                <div className='flex flex-wrap items-center gap-4 py-4'>
+                                    <ApplyCopoun />
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+                <section>
+                    <div className='container'>
+                        <h2 className='text-xl uppercase md:text-2xl lg:text-3xl xl:text-4xl'>cart total</h2>
+                        <div className='divide-background-secondary mt-8 space-y-5 divide-y'>
+                            <div className='grid grid-cols-12 gap-4 pb-5'>
+                                <div className='col-span-full md:col-span-2'>
+                                    <h3 className='text-foreground font-jost font-bold uppercase'>subtotal</h3>
+                                </div>
+                                <div className='text-gray col-span-full flex items-center font-bold md:col-span-9'>
+                                    <p>$ 204.00</p>
+                                </div>
+                            </div>
+                            <div className='grid grid-cols-12 items-center gap-4 pb-5'>
+                                <div className='col-span-full md:col-span-2'>
+                                    <h3 className='text-foreground font-jost font-bold uppercase'>shipping</h3>
+                                </div>
+                                <ShippingForm />
+                            </div>
+                            <div className='grid grid-cols-12 gap-4 pb-5'>
+                                <div className='col-span-full md:col-span-2'>
+                                    <h3 className='text-foreground font-jost font-bold uppercase'>total</h3>
+                                </div>
+                                <div className='text-gray col-span-full flex items-center font-bold md:col-span-9'>
+                                    <p>$ 204.00</p>
+                                </div>
+                            </div>
+                            <div className='flex flex-wrap items-center gap-4'>
+                                <Button variant={'dark'} size={'xl'}>
+                                    procceed to checkout
+                                </Button>
+                                <Button variant={'outline'} size={'xl'}>
+                                    continue shopping
+                                </Button>
+                            </div>
                         </div>
                     </div>
                 </section>
+                <SignUpNewsletter />
             </main>
         </>
     );
 };
 
 export default page;
-// <div key={index} className='grid grid-cols-12 items-center gap-4 py-4'>
-//     {/* Product Info */}
-//     <div className='col-span-full flex items-center gap-4 lg:col-span-5'>
-//         <div className='h-20 w-20 flex-shrink-0 overflow-hidden rounded bg-gray-100'>
-//             <Image
-//                 src='/images/cat-item1.jpg'
-//                 alt='Handmade Crop Sweater'
-//                 width={80}
-//                 height={80}
-//                 className='h-full w-full object-cover'
-//             />
-//         </div>
-// <div>
-//     <h3 className='text-foreground text-lg tracking-wide uppercase'>
-//         HANDMADE CROP SWEATER
-//     </h3>
-// </div>
-//     </div>
-
-//     {/* Unit Price */}
-// <div className='col-span-2 text-center'>
-//     <span className='font-medium'>$54.00</span>
-// </div>
-
-// {/* Quantity Controls */}
-// <div className='col-span-2 flex items-center justify-center'>
-//     <div className='flex items-center rounded border border-gray-200'>
-//         <Button variant='ghost' size='sm' className='h-8 w-8 p-0 hover:bg-gray-100'>
-//             <Minus className='h-3 w-3' />
-//         </Button>
-//         <Input
-//             type='number'
-//             value='1'
-//             className='h-8 w-12 border-0 text-center focus:border-0 focus:ring-0'
-//             readOnly
-//         />
-//         <Button variant='ghost' size='sm' className='h-8 w-8 p-0 hover:bg-gray-100'>
-//             <Plus className='h-3 w-3' />
-//         </Button>
-//     </div>
-// </div>
-
-// {/* Total */}
-// <div className='col-span-2 text-center'>
-//     <span className='font-medium text-gray-900'>$54.00</span>
-// </div>
-
-// {/* Remove Button */}
-// <div className='col-span-1 flex justify-center'>
-//     <Button variant='ghost' size='sm' className='h-8 w-8 p-0 hover:bg-gray-100'>
-//         <X className='h-4 w-4 text-gray-400' />
-//     </Button>
-// </div>
-// </div>

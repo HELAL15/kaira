@@ -19,6 +19,7 @@ const SectionHeading = ({ title = 'Section Title' }: { title?: string }) => {
                         src={'/images/hero2.jpg'}
                         alt='section heading'
                     />
+                    <div className='absolute inset-0 bg-black/50'></div>
                     <div className='relative z-10 container text-white'>
                         <h1
                             className='aos-init text-center text-3xl text-white uppercase md:text-5xl lg:text-6xl'
