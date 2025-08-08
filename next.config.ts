@@ -5,7 +5,8 @@ import createNextIntlPlugin from 'next-intl/plugin';
 const nextConfig: NextConfig = {
   images: {
     domains: ['localhost:3000'],
-    formats: ['image/avif', 'image/webp']
+    formats: ['image/avif', 'image/webp'],
+    minimumCacheTTL: 31536000, // year
   },
   eslint: {
     ignoreDuringBuilds: true, // Disable ESLint during builds
