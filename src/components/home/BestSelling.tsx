@@ -12,7 +12,7 @@ const BestSelling = () => {
                     <Heading
                         title='best selling items'
                         link={{
-                            href: '/products',
+                            href: '/shop',
                             desc: 'view all products'
                         }}
                     />

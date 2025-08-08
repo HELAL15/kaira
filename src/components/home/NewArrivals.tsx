@@ -12,7 +12,7 @@ const NewArrivals = () => {
                     <Heading
                         title='our new arrivals'
                         link={{
-                            href: '/products',
+                            href: '/shop',
                             desc: 'view all products'
                         }}
                     />

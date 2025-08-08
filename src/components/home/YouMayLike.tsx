@@ -12,7 +12,7 @@ const YouMayLike = () => {
                     <Heading
                         title='you may also like'
                         link={{
-                            href: '/products',
+                            href: '/shop',
                             desc: 'view all products'
                         }}
                     />

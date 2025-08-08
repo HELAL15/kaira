@@ -12,7 +12,7 @@ const ProductsSection = () => {
                     <Heading
                         title='our products'
                         link={{
-                            href: '/products',
+                            href: '/shop',
                             desc: 'view all products'
                         }}
                     />
