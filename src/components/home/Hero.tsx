@@ -61,7 +61,8 @@ const Hero = () => {
                                 // height={0}
                                 fill
                                 sizes='100vw'
-                                loading='lazy'
+                                priority
+                                fetchPriority='high'
                                 className='absolute inset-0 z-0 size-full object-cover'
                             />
                             <div
