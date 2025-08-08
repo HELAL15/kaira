@@ -18,6 +18,14 @@ const Layout = ({ children }: Readonly<{ children: ReactNode }>) => {
     return (
         <html suppressHydrationWarning lang={'en'} dir={'ltr'}>
             <head>
+                <link rel='preconnect' href='https://fonts.googleapis.com' />
+                <link rel='preconnect' href='https://fonts.gstatic.com' crossOrigin='' />
+                <link
+                    href='https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Marcellus&display=swap'
+                    rel='stylesheet'
+                />
+                <Script src='https://polyfill.io/v3/polyfill.min.js?features=Array.prototype.flat,Object.fromEntries' />
+
                 <Script strategy='afterInteractive' src='https://www.googletagmanager.com/gtag/js?id=G-S8XQ409H2C' />
                 <Script
                     id='google-analytics'

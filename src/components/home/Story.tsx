@@ -1,7 +1,5 @@
 'use client';
 
-import { useRef, useState } from 'react';
-
 import {
     Dialog,
     DialogContent,
@@ -15,33 +13,14 @@ import { cn } from '@/lib/utils';
 import { Play } from 'lucide-react';
 
 export default function Story() {
-    const videoRef = useRef<HTMLVideoElement>(null);
-    const [isPaused, setIsPaused] = useState(true);
-
-    const handlePlay = () => {
-        setIsPaused(false);
-        videoRef.current?.play();
-    };
-
-    const handlePause = () => {
-        setIsPaused(true);
-        videoRef.current?.pause();
-    };
-
-    const toggleControl = () => {
-        if (isPaused) {
-            handlePlay();
-        } else {
-            handlePause();
-        }
-    };
-
     return (
         <>
             <section className='open-up aos-init overflow-hidden p-0' data-aos='zoom-out'>
                 <div className='relative h-[250px] md:h-[400px] lg:h-[80dvh]'>
                     <Dialog>
-                        <DialogTrigger className='group absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer'>
+                        <DialogTrigger
+                            aria-label='play video'
+                            className='group absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer'>
                             <div className='relative flex size-[120px] items-center justify-center md:size-[200px] lg:size-[250px]'>
                                 {/* Animated circular text */}
                                 <div className='animate-spin-slow absolute inset-0 overflow-visible'>
@@ -88,11 +67,7 @@ export default function Story() {
                                 referrerPolicy='strict-origin-when-cross-origin'></iframe>
                         </DialogContent>
                     </Dialog>
-                    <img
-                        src='/images/video-image.webp'
-                        alt='Poster'
-                        className={cn('h-full w-full object-cover', !isPaused && 'hidden')}
-                    />
+                    <img src='/images/video-image.webp' alt='Poster' className={cn('h-full w-full object-cover')} />
                 </div>
             </section>
         </>
