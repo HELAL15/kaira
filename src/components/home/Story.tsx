@@ -1,5 +1,7 @@
 'use client';
 
+import Image from 'next/image';
+
 import {
     Dialog,
     DialogContent,
@@ -20,7 +22,7 @@ export default function Story() {
                     <Dialog>
                         <DialogTrigger
                             aria-label='play video'
-                            className='group absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer'>
+                            className='group absolute top-1/2 left-1/2 z-20 -translate-x-1/2 -translate-y-1/2 cursor-pointer'>
                             <div className='relative flex size-[120px] items-center justify-center md:size-[200px] lg:size-[250px]'>
                                 {/* Animated circular text */}
                                 <div className='animate-spin-slow absolute inset-0 overflow-visible'>
@@ -67,7 +69,14 @@ export default function Story() {
                                 referrerPolicy='strict-origin-when-cross-origin'></iframe>
                         </DialogContent>
                     </Dialog>
-                    <img src='/images/video-image.webp' alt='Poster' className={cn('h-full w-full object-cover')} />
+                    <Image
+                        fill
+                        src='/images/video-image.webp'
+                        alt='Poster'
+                        loading='lazy'
+                        draggable='false'
+                        className={cn('relative -z-10 h-full w-full object-cover')}
+                    />
                 </div>
             </section>
         </>
