@@ -302,3 +302,6 @@
     @apply p-0;
   }
 
+[aria-selected="true"]{
+    @apply !border-b !border-b-foreground !shadow-0 !rounded-none;
+}

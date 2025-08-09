@@ -1,16 +1,17 @@
 import React from 'react';
 
-import SwiperContainer from '@/components/common/SwiperContainer';
-import Heading from '@/components/ui/Heading';
 import { items } from '@/constants/data';
 
-const YouMayLike = () => {
+import SwiperContainer from '../common/SwiperContainer';
+import Heading from '../ui/Heading';
+
+const RelatedProducts = () => {
     return (
         <>
             <section>
                 <div className='open-up aos-init container' data-aos='zoom-out'>
                     <Heading
-                        title='you may also like'
+                        title='related products'
                         link={{
                             href: '/shop',
                             desc: 'view all products'
@@ -23,4 +24,4 @@ const YouMayLike = () => {
     );
 };
 
-export default YouMayLike;
+export default RelatedProducts;

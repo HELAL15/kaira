@@ -1,10 +1,12 @@
 import React from 'react';
 
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { cn } from '@/lib/utils';
 
 interface Blog {
+    id?: number;
     title?: string;
     img?: string;
     date?: string;
@@ -17,7 +19,7 @@ interface BlogCardProps {
     variant?: string;
 }
 
-const BlogCard = ({ blog, variant = 'lg' }: BlogCardProps) => {
+const BlogCard = ({ blog = {}, variant = 'lg' }: BlogCardProps) => {
     const {
         title = 'How to look outstanding in pastel',
         img = '/images/hero4.jpg',
@@ -47,13 +49,14 @@ const BlogCard = ({ blog, variant = 'lg' }: BlogCardProps) => {
 
     return (
         <>
-            <div className='card aos init space-y-4' data-aos='fade-in'>
+            <Link href={`/blog/${blog.id}`} className='card aos init space-y-4' data-aos='fade-in'>
                 <Image
                     src={img as string}
                     alt='Blog Image'
                     width={0}
                     height={550}
                     loading='lazy'
+                    draggable='false'
                     sizes='100vw'
                     className={cn('w-full object-cover', variants[variant]?.img)}
                 />
@@ -63,10 +66,10 @@ const BlogCard = ({ blog, variant = 'lg' }: BlogCardProps) => {
                         <span>/</span>
                         <span>{date}</span>
                     </div>
-                    <h2 className={cn('text-foreground text-6xl uppercase', variants[variant]?.title)}>{title}</h2>
+                    <h2 className={cn('text-foreground uppercase', variants[variant]?.title)}>{title}</h2>
                     <p>{description}</p>
                 </div>
-            </div>
+            </Link>
         </>
     );
 };
