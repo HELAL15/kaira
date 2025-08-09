@@ -5,7 +5,8 @@ import { Metadata } from 'next';
 import AnimateAOS from '@/components/common/AnimateAOS';
 import SignUpNewsletter from '@/components/common/SignUpNewsletter';
 import RelatedProducts from '@/components/singleProduct/RelatedProducts';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+
+// import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 export const metadata: Metadata = {
     title: 'Product Details',
@@ -19,7 +20,7 @@ const page = () => {
                 <main>
                     <section>
                         <div className='container'>
-                            <Tabs defaultValue='description'>
+                            {/* <Tabs defaultValue='description'>
                                 <TabsList className='border-background-secondary w-full justify-center border-b bg-transparent p-0'>
                                     <TabsTrigger className='nav-link p-0 uppercase shadow-none' value='description'>
                                         description
@@ -44,7 +45,7 @@ const page = () => {
                                     </div>
                                 </TabsContent>
                                 <TabsContent value='password'>Change your password here.</TabsContent>
-                            </Tabs>
+                            </Tabs> */}
                         </div>
                     </section>
                     <RelatedProducts />
