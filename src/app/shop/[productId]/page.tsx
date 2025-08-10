@@ -1,19 +1,46 @@
 import React from 'react';
 
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 
 import AnimateAOS from '@/components/common/AnimateAOS';
 import SignUpNewsletter from '@/components/common/SignUpNewsletter';
 import RelatedProducts from '@/components/singleProduct/RelatedProducts';
 
 // import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+const getProductDetails = async (productId: number) => {
+    try {
+        const response = await fetch(`https://api.jaar.cloud/api/v1/products/${productId}?include_stock=true`, {
+            next: { revalidate: 60 },
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer 2573|YlpNgvEffABDyLSxjs0oqX5F4qMQj42pAcspcELU401f3550` // move to env
+            }
+        });
+
+        const data = await response.json();
+
+        return data;
+    } catch (e) {
+        console.error('Error fetching product details:', e);
+        notFound(); // fallback to 404
+    }
+};
 
 export const metadata: Metadata = {
     title: 'Product Details',
     description: 'Explore our product details page for in-depth information and related products.'
 };
 
-const page = () => {
+const page = async ({ params }: { params?: { productId?: number } }) => {
+    const productId = await Number(params?.productId);
+    const productDetails = await getProductDetails(productId);
+    console.log(productDetails);
+
+    if (productDetails.status === 404) {
+        notFound(); // trigger 404 page if product not found
+    }
+
     return (
         <>
             <AnimateAOS>

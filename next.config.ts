@@ -3,7 +3,7 @@ import { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ['localhost:3000','api.jaar.cloud'],
+    domains: ['localhost','api.jaar.cloud'],
     formats: ['image/avif', 'image/webp'],
   },
   eslint: {

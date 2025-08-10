@@ -1,7 +1,7 @@
 'use client';
 
 import type { ReactNode } from 'react';
-import React from 'react';
+import React, { Suspense } from 'react';
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
@@ -63,9 +63,11 @@ const ShopSearchForm = ({ products }: IProps) => {
                                     </Sheet>
                                 </div>
                             </div>
-                            {items?.map((product: { [key: string]: FieldValues }) => (
-                                <ProductCard key={product?.id as unknown as number} product={product} />
-                            ))}
+                            <Suspense fallback={<p>loading....</p>}>
+                                {items?.map((product: { [key: string]: FieldValues }) => (
+                                    <ProductCard key={product?.id as unknown as number} product={product} />
+                                ))}
+                            </Suspense>
                             <div className='col-span-full flex items-center justify-center gap-4'>
                                 <ProductsPagination meta={meta} />
                             </div>
