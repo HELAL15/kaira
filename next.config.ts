@@ -1,29 +1,15 @@
 import { NextConfig } from 'next';
 
-import createNextIntlPlugin from 'next-intl/plugin';
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ['localhost:3000'],
+    domains: ['localhost:3000','api.jaar.cloud'],
     formats: ['image/avif', 'image/webp'],
-    minimumCacheTTL: 31536000, // year
   },
   eslint: {
     ignoreDuringBuilds: true, // Disable ESLint during builds
   },
-  async headers() {
-    return [
-      {
-        source: '/(.*)',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable', 
-          },
-        ],
-      },
-    ];
-  },
+
 };
 
 // const withNextIntl = createNextIntlPlugin();

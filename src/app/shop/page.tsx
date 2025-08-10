@@ -1,37 +1,28 @@
 import { Metadata } from 'next';
 
-import AnimateAOS from '@/components/common/AnimateAOS';
 import SectionHeading from '@/components/common/SectionHeading';
-import ProductCard from '@/components/ui/ProductCard';
-import { items } from '@/constants/data';
+import ShopSearchForm from '@/components/shop/ShopSearchForm';
+import { useServerFetch } from '@/lib/userServerFetch';
 
 export const metadata: Metadata = {
     title: 'shop - kaira'
 };
 
-const page = () => {
-    return (
-        <>
-            <main>
-                <SectionHeading title='shop' />
-                {/* <ProductsSection /> */}
-                <AnimateAOS>
-                    <section data-aos='zoom-out' className='open-up aos-init'>
-                        <div className='container'>
-                            <div className='grid grid-cols-12 gap-4'>
-                                <div className='col-span-full grid grid-cols-2 gap-4 md:grid-cols-3 lg:col-span-9'>
-                                    {items.map((product) => (
-                                        <ProductCard key={product?.id} product={product} />
-                                    ))}
-                                </div>
-                                <div className='col-span-3 bg-red-500'></div>
-                            </div>
-                        </div>
-                    </section>
-                </AnimateAOS>
-            </main>
-        </>
-    );
-};
+const API_URL = 'https://api.jaar.cloud/api/v1/products';
+const API_TOKEN = 'Bearer 2573|YlpNgvEffABDyLSxjs0oqX5F4qMQj42pAcspcELU401f3550';
 
-export default page;
+export default async function Page({ searchParams }: { searchParams: Record<string, string | undefined> }) {
+    const products = await useServerFetch({
+        baseUrl: API_URL,
+        token: API_TOKEN,
+        defaults: { page: '1', page_count: '12' },
+        params: searchParams
+    });
+
+    return (
+        <main>
+            <SectionHeading title='shop' />
+            <ShopSearchForm products={products || {}} />
+        </main>
+    );
+}

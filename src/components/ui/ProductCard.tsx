@@ -7,7 +7,7 @@ import { Eye, Heart } from 'lucide-react';
 import type { FieldValues } from 'react-hook-form';
 
 const ProductCard = ({ product, delay }: { product?: FieldValues; delay?: number }) => {
-    const { id, title, price, image } = product || {};
+    const { id, title, price, image, product_banner } = product || {};
 
     return (
         <>
@@ -17,7 +17,7 @@ const ProductCard = ({ product, delay }: { product?: FieldValues; delay?: number
                 className='aos-init gap-2 border-0 bg-transparent p-0 shadow-none'>
                 <CardContent className='group relative overflow-hidden p-0'>
                     <Image
-                        src={image || '/images/cat-item1.jpg'}
+                        src={image || product_banner || '/images/cat-item1.jpg'}
                         alt={'product'}
                         width={0}
                         height={0}
@@ -43,7 +43,7 @@ const ProductCard = ({ product, delay }: { product?: FieldValues; delay?: number
                 <CardFooter className='m-0 flex flex-col items-start gap-2 p-0'>
                     <Link
                         aria-label={title}
-                        href={'/shop/1'}
+                        href={`/shop/${id}`}
                         className='hovered-underlined font-marcellus text-lg uppercase'>
                         {title || 'Product Title'}
                     </Link>
