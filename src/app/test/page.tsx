@@ -4,9 +4,15 @@ import SectionHeading from '@/components/common/SectionHeading';
 import { PaginationWithLinks } from '@/components/ui/pagination-with-links';
 import { axiosInstance } from '@/lib/axiosInstance';
 
+// import ChildrenComponentsPattern from './ChildrenComponentsPattern';
+// import Heavy from './Heavy';
 import ProductsList from './ProductsList';
 
-export default async function page({ searchParams }: { searchParams?: { page?: string } }) {
+export default async function page({
+    searchParams
+}: {
+    searchParams?: { [key: string]: string | string[] | undefined };
+}) {
     const page = Number(searchParams?.page) || 1;
     const count = 12;
 
@@ -21,6 +27,9 @@ export default async function page({ searchParams }: { searchParams?: { page?: s
     return (
         <main>
             <SectionHeading title='Products' />
+            {/* <ChildrenComponentsPattern>
+                <Heavy />
+            </ChildrenComponentsPattern> */}
             <section>
                 <div className='container'>
                     <Suspense fallback={<ProductsLoader />}>
