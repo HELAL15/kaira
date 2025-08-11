@@ -6,40 +6,33 @@ import { notFound } from 'next/navigation';
 import AnimateAOS from '@/components/common/AnimateAOS';
 import SignUpNewsletter from '@/components/common/SignUpNewsletter';
 import RelatedProducts from '@/components/singleProduct/RelatedProducts';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { axiosInstance } from '@/lib/axiosInstance';
 
-// import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-const getProductDetails = async (productId: number) => {
-    try {
-        const response = await fetch(`https://api.jaar.cloud/api/v1/products/${productId}?include_stock=true`, {
-            next: { revalidate: 60 },
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer 2573|YlpNgvEffABDyLSxjs0oqX5F4qMQj42pAcspcELU401f3550` // move to env
-            }
-        });
-
-        const data = await response.json();
-
-        return data;
-    } catch (e) {
-        console.error('Error fetching product details:', e);
-        notFound(); // fallback to 404
-    }
-};
+import { AxiosError } from 'axios';
 
 export const metadata: Metadata = {
     title: 'Product Details',
     description: 'Explore our product details page for in-depth information and related products.'
 };
 
+const getProducts = async (productId?: string) => {
+    try {
+        const data = await axiosInstance.get(`/products/${productId}`);
+
+        return data.data;
+    } catch (error) {
+        if (error instanceof AxiosError && error.response?.status === 404) {
+            return notFound();
+        }
+        throw error;
+    }
+};
+
 const page = async ({ params }: { params?: { productId?: number } }) => {
     const productId = await Number(params?.productId);
-    const productDetails = await getProductDetails(productId);
-    console.log(productDetails);
-
-    if (productDetails.status === 404) {
-        notFound(); // trigger 404 page if product not found
-    }
+    const data = await getProducts(String(productId));
+    console.log(data);
 
     return (
         <>
@@ -47,7 +40,7 @@ const page = async ({ params }: { params?: { productId?: number } }) => {
                 <main>
                     <section>
                         <div className='container'>
-                            {/* <Tabs defaultValue='description'>
+                            <Tabs defaultValue='description'>
                                 <TabsList className='border-background-secondary w-full justify-center border-b bg-transparent p-0'>
                                     <TabsTrigger className='nav-link p-0 uppercase shadow-none' value='description'>
                                         description
@@ -72,7 +65,7 @@ const page = async ({ params }: { params?: { productId?: number } }) => {
                                     </div>
                                 </TabsContent>
                                 <TabsContent value='password'>Change your password here.</TabsContent>
-                            </Tabs> */}
+                            </Tabs>
                         </div>
                     </section>
                     <RelatedProducts />

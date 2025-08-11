@@ -291,17 +291,17 @@
 .carousel-icon svg {
     width: 28px;  /* or whatever size you want */
     height: 28px;
-  }
+}
 
-  [data-slot="carousel-content"] {
+[data-slot="carousel-content"] {
     @apply flex-grow;
-  }
+}
 
 
-  [aria-label="Notifications alt+T"]{
+[aria-label="Notifications alt+T"]{
     @apply p-0;
-  }
+}
 
-/* [aria-selected="true"]{
-    @apply !border-b !border-b-foreground !shadow-0 !rounded-none;
-} */
+[aria-selected="true"]{
+    @apply !border-b !border-b-foreground !rounded-none !shadow-none;
+}

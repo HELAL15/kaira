@@ -4,8 +4,14 @@ import React from 'react';
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
+import { cn } from '@/lib/utils';
+
 import { Button } from '../ui/Button';
+import RadioForm from '../ui/RadioForm';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../ui/accordion';
+import { Label } from '../ui/label';
+import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
+import { Controller, FormProvider, useForm } from 'react-hook-form';
 
 const ShopFilters = () => {
     const searchParams = useSearchParams();
@@ -58,206 +64,142 @@ const ShopFilters = () => {
         { id: 'electronics', label: 'Electronics' }
     ];
 
-    const getActive = (name: string) => {
-        return searchParams.get(name) || '';
-    };
-    const checkIsActive = (name: string, value: string) => {
-        return (value && getActive(name) === value) || (!value && !getActive(name));
-    };
-
-    const searcher = ({ name, id }: { name: string; id: string }) => {
-        const params = new URLSearchParams(searchParams);
-        if (id) {
-            params.set(name, id);
-        } else {
-            params.delete(name);
-        }
-        router.push(`?${params.toString()}`);
-    };
-
+    const params = new URLSearchParams(searchParams);
     const handleResetFilters = () => {
-        const params = new URLSearchParams(searchParams);
         for (const key of params.keys()) {
             params.delete(key);
         }
         router.push(`${pathname}`);
     };
 
+    const form = useForm({
+        defaultValues: {
+            main_category_id: '',
+            color_id: '',
+            size_id: '',
+            price_id: '',
+            brand_id: '',
+            availability_id: ''
+        }
+    });
+
+    const { handleSubmit } = form;
+
+    const handleChange = handleSubmit((data) => {
+        console.log(data);
+        Object.entries(data).forEach(([key, value]) => {
+            if (value) {
+                params.set(key, value);
+            } else {
+                params.delete(key);
+            }
+        });
+        router.push(`${pathname}?${params.toString()}`);
+    });
+
     return (
         <>
-            <div className='space-y-6'>
-                {/* Categories Section */}
-                <div className='space-y-4'>
-                    <h2 className='border-background-secondary border-b pb-3 text-lg uppercase md:text-xl'>
-                        browse by categories
-                    </h2>
+            <FormProvider {...form}>
+                <form onChange={handleChange} className='space-y-6'>
+                    {/* Categories Section */}
+                    <div className='space-y-4'>
+                        <h2 className='border-background-secondary border-b pb-3 text-lg uppercase md:text-xl'>
+                            browse by categories
+                        </h2>
 
-                    {categories.map((category) => {
-                        const isActive = checkIsActive('main_category_id', category.id);
+                        <Controller
+                            name='main_category_id'
+                            control={form.control}
+                            render={({ field: { onChange, value, ...rest } }) => (
+                                <RadioGroup
+                                    {...rest}
+                                    value={value}
+                                    onValueChange={onChange}
+                                    className='flex flex-col gap-2 text-lg'>
+                                    {categories?.map((cat) => (
+                                        <Label
+                                            key={cat.id}
+                                            className={cn(
+                                                'nav-link cursor-pointer text-xl',
+                                                value === String(cat.id) ? 'text-black' : ''
+                                            )}>
+                                            <RadioGroupItem value={String(cat.id)} className='peer sr-only' />
 
-                        return (
-                            <button
-                                key={category.id || ''}
-                                onClick={() =>
-                                    searcher({
-                                        name: 'main_category_id',
-                                        id: category.id || ''
-                                    })
-                                }
-                                className={`nav-link flex w-full cursor-pointer items-center gap-2 duration-300 ${isActive ? 'text-black' : 'text-gray-500 hover:text-black'}`}>
-                                {category.label}
-                            </button>
-                        );
-                    })}
-                </div>
+                                            <span className='text-sm'>{cat.label}</span>
+                                        </Label>
+                                    ))}
+                                </RadioGroup>
+                            )}
+                        />
+                    </div>
 
-                {/* Filters Section */}
-                <div className='space-y-4'>
-                    <h2 className='border-background-secondary border-b pb-3 text-lg uppercase md:text-xl'>
-                        filter by :
-                    </h2>
-                    <Accordion type='single' collapsible className='w-full' defaultValue='item-1'>
-                        {/* Color Filter */}
-                        <AccordionItem value='item-1'>
-                            <AccordionTrigger className='text-gray text-lg uppercase hover:no-underline'>
-                                color
-                            </AccordionTrigger>
-                            <AccordionContent className='flex flex-col gap-3 text-balance'>
-                                {filterData.colors.map((color) => {
-                                    const isActive = checkIsActive('color_id', color.id);
+                    {/* Filters Section */}
+                    <div className='space-y-4'>
+                        <h2 className='border-background-secondary border-b pb-3 text-lg uppercase md:text-xl'>
+                            filter by :
+                        </h2>
+                        <Accordion type='single' collapsible className='w-full' defaultValue='item-1'>
+                            {/* Color Filter */}
+                            <AccordionItem value='item-1'>
+                                <AccordionTrigger className='text-gray text-lg uppercase hover:no-underline'>
+                                    color
+                                </AccordionTrigger>
+                                <AccordionContent className='flex flex-col gap-3 text-balance'>
+                                    <RadioForm name='color_id' data={filterData.colors} />
+                                </AccordionContent>
+                            </AccordionItem>
 
-                                    return (
-                                        <button
-                                            key={color.id || ''}
-                                            onClick={() =>
-                                                searcher({
-                                                    name: 'color_id',
-                                                    id: color.id || ''
-                                                })
-                                            }
-                                            className={`border-background-secondary flex w-full cursor-pointer items-center gap-2 border px-6 py-4 duration-300 peer-data-[state=checked]:border-black ${isActive ? 'border-black text-black' : 'text-gray-500 hover:text-black'}`}>
-                                            <span className={`block size-5 rounded-full ${color.colorClass}`} />
-                                            {color.label} ({color.count})
-                                        </button>
-                                    );
-                                })}
-                            </AccordionContent>
-                        </AccordionItem>
+                            {/* Size Filter */}
+                            <AccordionItem value='item-2'>
+                                <AccordionTrigger className='text-gray text-lg uppercase hover:no-underline'>
+                                    size
+                                </AccordionTrigger>
+                                <AccordionContent className='flex flex-col gap-3 text-balance'>
+                                    <RadioForm name='size_id' data={filterData.sizes} />
+                                </AccordionContent>
+                            </AccordionItem>
 
-                        {/* Size Filter */}
-                        <AccordionItem value='item-2'>
-                            <AccordionTrigger className='text-gray text-lg uppercase hover:no-underline'>
-                                size
-                            </AccordionTrigger>
-                            <AccordionContent className='flex flex-col gap-3 text-balance'>
-                                {filterData.sizes.map((size) => {
-                                    const isActive = checkIsActive('size_id', size.id);
+                            {/* Price Filter */}
+                            <AccordionItem value='item-3'>
+                                <AccordionTrigger className='text-gray text-lg uppercase hover:no-underline'>
+                                    price
+                                </AccordionTrigger>
+                                <AccordionContent className='flex flex-col gap-3 text-balance'>
+                                    <RadioForm name='price_id' data={filterData.prices} />
+                                </AccordionContent>
+                            </AccordionItem>
 
-                                    return (
-                                        <button
-                                            key={size.id || ''}
-                                            onClick={() =>
-                                                searcher({
-                                                    name: 'size_id',
-                                                    id: size.id || ''
-                                                })
-                                            }
-                                            className={`border-background-secondary flex w-full cursor-pointer items-center gap-2 border px-6 py-4 duration-300 peer-data-[state=checked]:border-black ${isActive ? 'border-black text-black' : 'text-gray-500 hover:text-black'}`}>
-                                            {size.label} ({size.count})
-                                        </button>
-                                    );
-                                })}
-                            </AccordionContent>
-                        </AccordionItem>
+                            {/* Brand Filter */}
+                            <AccordionItem value='item-4'>
+                                <AccordionTrigger className='text-gray text-lg uppercase hover:no-underline'>
+                                    brand
+                                </AccordionTrigger>
+                                <AccordionContent className='flex flex-col gap-3 text-balance'>
+                                    <RadioForm name='brand_id' data={filterData.brands} />
+                                </AccordionContent>
+                            </AccordionItem>
 
-                        {/* Price Filter */}
-                        <AccordionItem value='item-3'>
-                            <AccordionTrigger className='text-gray text-lg uppercase hover:no-underline'>
-                                price
-                            </AccordionTrigger>
-                            <AccordionContent className='flex flex-col gap-3 text-balance'>
-                                {filterData.prices.map((price) => {
-                                    const isActive = checkIsActive('price_id', price.id);
-
-                                    return (
-                                        <button
-                                            key={price.id || ''}
-                                            onClick={() =>
-                                                searcher({
-                                                    name: 'price_id',
-                                                    id: price.id || ''
-                                                })
-                                            }
-                                            className={`border-background-secondary flex w-full cursor-pointer items-center gap-2 border px-6 py-4 duration-300 peer-data-[state=checked]:border-black ${isActive ? 'border-black text-black' : 'text-gray-500 hover:text-black'}`}>
-                                            {price.label} ({price.count})
-                                        </button>
-                                    );
-                                })}
-                            </AccordionContent>
-                        </AccordionItem>
-
-                        {/* Brand Filter */}
-                        <AccordionItem value='item-4'>
-                            <AccordionTrigger className='text-gray text-lg uppercase hover:no-underline'>
-                                brand
-                            </AccordionTrigger>
-                            <AccordionContent className='flex flex-col gap-3 text-balance'>
-                                {filterData.brands.map((brand) => {
-                                    const isActive = checkIsActive('brand_id', brand.id);
-
-                                    return (
-                                        <button
-                                            key={brand.id || ''}
-                                            onClick={() =>
-                                                searcher({
-                                                    name: 'brand_id',
-                                                    id: brand.id || ''
-                                                })
-                                            }
-                                            className={`border-background-secondary flex w-full cursor-pointer items-center gap-2 border px-6 py-4 duration-300 peer-data-[state=checked]:border-black ${isActive ? 'border-black text-black' : 'text-gray-500 hover:text-black'}`}>
-                                            {brand.label} ({brand.count})
-                                        </button>
-                                    );
-                                })}
-                            </AccordionContent>
-                        </AccordionItem>
-
-                        {/* Availability Filter */}
-                        <AccordionItem value='item-5'>
-                            <AccordionTrigger className='text-gray text-lg uppercase hover:no-underline'>
-                                availability
-                            </AccordionTrigger>
-                            <AccordionContent className='flex flex-col gap-3 text-balance'>
-                                {filterData.availability.map((availability) => {
-                                    const isActive = checkIsActive('availability_id', availability.id);
-
-                                    return (
-                                        <button
-                                            key={availability.id || ''}
-                                            onClick={() =>
-                                                searcher({
-                                                    name: 'availability_id',
-                                                    id: availability.id || ''
-                                                })
-                                            }
-                                            className={`border-background-secondary flex w-full cursor-pointer items-center gap-2 border px-6 py-4 duration-300 peer-data-[state=checked]:border-black ${isActive ? 'border-black text-black' : 'text-gray-500 hover:text-black'}`}>
-                                            {availability.label} ({availability.count})
-                                        </button>
-                                    );
-                                })}
-                            </AccordionContent>
-                        </AccordionItem>
-                    </Accordion>
-                    <Button
-                        variant={'ghost'}
-                        size={'sm'}
-                        className='w-full text-center'
-                        type='button'
-                        onClick={handleResetFilters}>
-                        reset all filters
-                    </Button>
-                </div>
-            </div>
+                            {/* Availability Filter */}
+                            <AccordionItem value='item-5'>
+                                <AccordionTrigger className='text-gray text-lg uppercase hover:no-underline'>
+                                    availability
+                                </AccordionTrigger>
+                                <AccordionContent className='flex flex-col gap-3 text-balance'>
+                                    <RadioForm name='availability_id' data={filterData.availability} />
+                                </AccordionContent>
+                            </AccordionItem>
+                        </Accordion>
+                        <Button
+                            variant={'ghost'}
+                            size={'sm'}
+                            className='w-full text-center'
+                            type='button'
+                            onClick={handleResetFilters}>
+                            reset all filters
+                        </Button>
+                    </div>
+                </form>
+            </FormProvider>
         </>
     );
 };

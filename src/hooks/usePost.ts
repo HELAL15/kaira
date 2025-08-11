@@ -1,4 +1,5 @@
 import axiosClient from '@/lib/axiosClient';
+import { axiosInstance } from '@/lib/axiosInstance';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import type { FieldValues } from 'react-hook-form';
@@ -18,11 +19,11 @@ const usePost = ({ endpoint = '', revalid = [], onSuccess, onError, method = 'po
         mutationFn: (data: FormData | FieldValues) => {
             switch (method.toLowerCase()) {
                 case 'post':
-                    return axiosClient.post(endpoint, data);
+                    return axiosInstance.post(endpoint, data);
                 case 'put':
-                    return axiosClient.put(endpoint, data);
+                    return axiosInstance.put(endpoint, data);
                 case 'delete':
-                    return axiosClient.delete(endpoint, { data });
+                    return axiosInstance.delete(endpoint, { data });
                 default:
                     throw new Error(`Unsupported method: ${method}`);
             }

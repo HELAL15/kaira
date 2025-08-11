@@ -1,22 +1,65 @@
-export async function fetchApi<T>(url: string, options?: RequestInit): Promise<T> {
-  try {
-    const res = await fetch(url, {
-      next: { revalidate: 60 },
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${process.env.API_TOKEN}`,
-        ...(options?.headers || {})
-      },
-      ...options
-    });
 
-    if (!res.ok) {
-      throw new Error(`API Error: ${res.status}`);
+
+import type { AxiosRequestConfig } from "axios";
+import { axiosInstance } from "./axiosInstance";
+
+
+
+export default class Api {
+  static async get(url: string, options?: AxiosRequestConfig & { params?: Record<string, string | undefined> }) {
+    try {
+      const res = await axiosInstance.get(url, {
+        ...options,
+        params: options?.params || {}
+      });
+
+      return res.data;
+    } catch (error) {
+      console.error(`GET ${url} failed:`, error);
+      throw error;
     }
+  }
 
-    return res.json();
-  } catch (error) {
-    console.error(`Fetch error for ${url}:`, error);
-    throw error;
+  async post(url: string, data?: AxiosRequestConfig, options?: AxiosRequestConfig & { params?: Record<string, string | undefined> }) {
+    try {
+      const res = await axiosInstance.post(url, data, {
+        ...options,
+        params: options?.params || {}
+      });
+
+      return res.data;
+    } catch (error) {
+      console.error(`POST ${url} failed:`, error);
+      throw error;
+    }
+  }
+
+  async put(url: string, data?: AxiosRequestConfig, options?: AxiosRequestConfig & { params?: Record<string, string | undefined> }) {
+    try {
+      const res = await axiosInstance.put(url, data, {
+        ...options,
+        params: options?.params || {}
+      });
+
+      return res.data;
+    } catch (error) {
+      console.error(`PUT ${url} failed:`, error);
+      throw error;
+    }
+  }
+
+  async delete(url: string, options?: AxiosRequestConfig & { params?: Record<string, string | undefined> }) {
+    try {
+      const res = await axiosInstance.delete(url, {
+        ...options,
+        params: options?.params || {}
+      });
+
+      return res.data;
+    } catch (error) {
+      console.error(`DELETE ${url} failed:`, error);
+      throw error;
+    }
   }
 }
+
