@@ -11,10 +11,7 @@ const ProductCard = ({ product, delay }: { product?: FieldValues; delay?: number
 
     return (
         <>
-            <Card
-                data-aos='zoom-in-down'
-                data-aos-delay={delay}
-                className='aos-init gap-2 border-0 bg-transparent p-0 shadow-none'>
+            <Card className='gap-2 border-0 bg-transparent p-0 shadow-none'>
                 <CardContent className='group relative overflow-hidden p-0'>
                     <Image
                         src={image || '/images/cat-item1.jpg'}

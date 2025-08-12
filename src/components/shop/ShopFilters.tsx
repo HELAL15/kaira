@@ -65,25 +65,19 @@ const ShopFilters = () => {
     ];
 
     const params = new URLSearchParams(searchParams);
-    const handleResetFilters = () => {
-        for (const key of params.keys()) {
-            params.delete(key);
-        }
-        router.push(`${pathname}`);
-    };
 
     const form = useForm({
         defaultValues: {
-            main_category_id: '',
-            color_id: '',
-            size_id: '',
-            price_id: '',
-            brand_id: '',
-            availability_id: ''
+            main_category_id: searchParams.get('main_category_id') || '',
+            color_id: searchParams.get('color_id') || '',
+            size_id: searchParams.get('size_id') || '',
+            price_id: searchParams.get('price_id') || '',
+            brand_id: searchParams.get('brand_id') || '',
+            availability_id: searchParams.get('availability_id') || ''
         }
     });
 
-    const { handleSubmit } = form;
+    const { handleSubmit, reset } = form;
 
     const handleChange = handleSubmit((data) => {
         console.log(data);
@@ -96,6 +90,14 @@ const ShopFilters = () => {
         });
         router.push(`${pathname}?${params.toString()}`);
     });
+
+    const handleResetFilters = () => {
+        for (const key of params.keys()) {
+            params.delete(key);
+        }
+        reset();
+        router.push(pathname);
+    };
 
     return (
         <>

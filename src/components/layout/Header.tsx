@@ -3,7 +3,8 @@ import Link from 'next/link';
 
 import NavLinks from '../common/NavLinks';
 import { Button } from '../ui/Button';
-import { Heart, Menu, Search, ShoppingCart, UserRound } from 'lucide-react';
+import HeaderMobile from './header/HeaderMobile';
+import { Heart, Search, ShoppingCart, UserRound } from 'lucide-react';
 
 const Header = () => {
     return (
@@ -57,16 +58,12 @@ const Header = () => {
                                 <UserRound className='size-[18px] md:size-[20px]' />
                             </i>
                         </Link>
-                        <Button title='search' variant={'ghost'} className='p-0'>
+                        {/* <Button title='search' variant={'ghost'} className='p-0'>
                             <i>
                                 <Search className='size-[18px] md:size-[20px]' />
                             </i>
-                        </Button>
-                        <Button title='menu' variant={'ghost'} className='p-0 lg:hidden'>
-                            <i>
-                                <Menu className='size-[18px] md:size-[20px]' />
-                            </i>
-                        </Button>
+                        </Button> */}
+                        <HeaderMobile />
                     </div>
                 </div>
             </div>

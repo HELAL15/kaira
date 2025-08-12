@@ -214,6 +214,10 @@
         @apply !font-marcellus text-foreground;
     }
 
+    button{
+        @apply cursor-pointer disabled:cursor-not-allowed;
+    }
+
 
 
 }

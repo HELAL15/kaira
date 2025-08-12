@@ -129,7 +129,7 @@ const page = () => {
                             </div>
                             <div className='author space-y-4 pb-6'>
                                 <h3 className='text-2xl uppercase'>Author</h3>
-                                <div className='flex gap-4'>
+                                <div className='flex gap-4 pb-4 max-md:flex-wrap'>
                                     <Image
                                         src='/images/author.jpg'
                                         alt='Author Image'
@@ -138,7 +138,7 @@ const page = () => {
                                         priority
                                         draggable='false'
                                         sizes='100vw'
-                                        className='h-[150px] w-[150px] object-cover'
+                                        className='size-[60px] object-cover md:size-[80px] lg:size-[100px]'
                                     />
                                     <div className='flex-grow'>
                                         <h4 className='font-bold uppercase'>Anna Younes</h4>
@@ -156,7 +156,7 @@ const page = () => {
                             <div className='comments space-y-4'>
                                 <h3 className='text-2xl uppercase'>3 Comments</h3>
                                 <div className='divide-background-secondary space-y-4 divide-y'>
-                                    <div className='flex gap-4 pb-4'>
+                                    <div className='flex gap-4 pb-4 max-md:flex-wrap'>
                                         <Image
                                             src='/images/author.jpg'
                                             alt='Author Image'
@@ -165,7 +165,7 @@ const page = () => {
                                             priority
                                             draggable='false'
                                             sizes='100vw'
-                                            className='h-[100px] w-[100px] object-cover'
+                                            className='size-[60px] object-cover md:size-[80px] lg:size-[100px]'
                                         />
                                         <div className='space-y-6'>
                                             <div className='space-y-1'>
@@ -188,7 +188,7 @@ const page = () => {
                                                     reply
                                                 </Button>
                                             </div>
-                                            <div className='flex gap-4 pb-4'>
+                                            <div className='flex gap-4 pb-4 max-md:flex-wrap max-md:px-6'>
                                                 <Image
                                                     src='/images/author.jpg'
                                                     alt='Author Image'
@@ -197,7 +197,7 @@ const page = () => {
                                                     priority
                                                     draggable='false'
                                                     sizes='100vw'
-                                                    className='h-[100px] w-[100px] object-cover'
+                                                    className='size-[60px] object-cover md:size-[80px] lg:size-[100px]'
                                                 />
                                                 <div className='space-y-1'>
                                                     <div className='flex items-center gap-4'>
@@ -222,7 +222,7 @@ const page = () => {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className='flex gap-4 pb-4'>
+                                    <div className='flex gap-4 pb-4 max-md:flex-wrap'>
                                         <Image
                                             src='/images/author.jpg'
                                             alt='Author Image'
@@ -231,7 +231,7 @@ const page = () => {
                                             priority
                                             draggable='false'
                                             sizes='100vw'
-                                            className='h-[100px] w-[100px] object-cover'
+                                            className='size-[60px] object-cover md:size-[80px] lg:size-[100px]'
                                         />
                                         <div className='space-y-1'>
                                             <div className='flex items-center gap-4'>
@@ -254,7 +254,7 @@ const page = () => {
                                             </Button>
                                         </div>
                                     </div>
-                                    <div className='flex gap-4 pb-4'>
+                                    <div className='flex gap-4 pb-4 max-md:flex-wrap'>
                                         <Image
                                             src='/images/author.jpg'
                                             alt='Author Image'
@@ -263,7 +263,7 @@ const page = () => {
                                             priority
                                             draggable='false'
                                             sizes='100vw'
-                                            className='h-[100px] w-[100px] object-cover'
+                                            className='size-[60px] object-cover md:size-[80px] lg:size-[100px]'
                                         />
                                         <div className='space-y-1'>
                                             <div className='flex items-center gap-4'>
