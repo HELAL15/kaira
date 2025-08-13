@@ -1,15 +1,13 @@
-import Image from 'next/image';
 import Link from 'next/link';
 
 import NavLinks from '../common/NavLinks';
-import { Button } from '../ui/Button';
 import Logo from '../ui/Logo';
 import HeaderMobile from './header/HeaderMobile';
-import { Heart, Search, ShoppingCart, UserRound } from 'lucide-react';
+import { Heart, ShoppingCart, UserRound } from 'lucide-react';
 
 const Header = () => {
     return (
-        <header className='bg-background-secondary dark:bg-background text-foreground dark:border-b-gray/30 sticky top-0 z-[999] border-b border-b-white py-4'>
+        <header className='bg-background-secondary dark:bg-background text-foreground dark:border-b-gray/30 sticky top-0 z-50 border-b border-b-white py-4'>
             <div className='container flex w-full items-center justify-between gap-6'>
                 <Logo />
 
