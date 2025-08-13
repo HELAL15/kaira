@@ -5,6 +5,12 @@
     "about": "About",
     "shop":"Shop",
     "blog":"blog",
+    "track_order": "Track Your Order",
+    "return_exchanges": "Returns & Exchanges",
+    "shipping_delivery": "Shipping & Delivery",
+    "contact_us": "Contact Us",
+    "find_us_easy": "Find Us Easily",
+    "faqs": "FAQs",
     "contact": "Contact",
     "login": "Login",
     "register": "Register"

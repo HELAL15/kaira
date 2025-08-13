@@ -11,27 +11,27 @@ const Footer = () => {
     const helpLinks = [
         {
             id: 1,
-            title: 'track your order',
+            title: 'track_order',
             href: '/order-tracking'
         },
         {
             id: 2,
-            title: 'return + exchanges',
+            title: 'return_exchanges',
             href: '/returns'
         },
         {
             id: 3,
-            title: 'shipping + delivery',
+            title: 'shipping_delivery',
             href: '/shipping'
         },
         {
             id: 4,
-            title: 'contact us',
+            title: 'contact_us',
             href: '/contact'
         },
         {
             id: 5,
-            title: 'find us easy',
+            title: 'find_us_easy',
             href: '/find-us'
         },
         {

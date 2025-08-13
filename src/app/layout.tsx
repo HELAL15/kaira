@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import type { Metadata } from 'next';
 import { Jost, Marcellus } from 'next/font/google';
 import Head from 'next/head';
+import { cookies } from 'next/headers';
 import Script from 'next/script';
 
 import AppProvider from '@/providers/AppProvider';
@@ -27,9 +28,13 @@ const marcellus = Marcellus({
     variable: '--font-marcellus'
 });
 
-const Layout = ({ children }: Readonly<{ children: ReactNode }>) => {
+const Layout = async ({ children }: Readonly<{ children: ReactNode }>) => {
+    const cookieStore = await cookies();
+    const locale = (await cookieStore.get('locale')?.value) || 'en';
+    const dir = (await locale) === 'ar' ? 'rtl' : 'ltr';
+
     return (
-        <html suppressHydrationWarning lang={'en'} dir={'ltr'}>
+        <html suppressHydrationWarning lang={locale} dir={dir}>
             {/* <head>
                 <Script strategy='afterInteractive' src='https://www.googletagmanager.com/gtag/js?id=G-S8XQ409H2C' />
                 <Script

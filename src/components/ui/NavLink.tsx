@@ -5,6 +5,8 @@ import { usePathname } from 'next/navigation';
 
 import { cn } from '@/lib/utils';
 
+import { useTranslations } from 'next-intl';
+
 interface IProps {
     href: string;
     title: string;
@@ -13,6 +15,7 @@ interface IProps {
 const NavLink = ({ href, title }: IProps) => {
     const pathname = usePathname();
     const isActive = pathname === href;
+    const t = useTranslations('nav');
 
     return (
         <Link
@@ -20,7 +23,7 @@ const NavLink = ({ href, title }: IProps) => {
             title={title}
             aria-label={title}
             className={cn('border-b border-transparent duration-300', isActive ? 'border-b-foreground' : 'nav-link')}>
-            {title}
+            {t(title)}
         </Link>
     );
 };

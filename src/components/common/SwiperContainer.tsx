@@ -2,15 +2,19 @@ import React from 'react';
 
 import ProductCard from '../ui/ProductCard';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '../ui/carousel';
+import { useLocale } from 'next-intl';
 import type { FieldValues } from 'react-hook-form';
 
 const SwiperContainer = ({ items = Array.from({ length: 10 }) }: { items?: FieldValues[] }) => {
+    const locale = useLocale();
+
     return (
         <>
             <Carousel
                 opts={{
                     align: 'start',
-                    loop: true
+                    loop: true,
+                    direction: locale === 'ar' ? 'rtl' : 'ltr'
                 }}
                 className='md:mx-auto md:max-w-[85vw]'>
                 <CarouselContent className='-ml-1 flex-shrink-0 flex-grow-0'>

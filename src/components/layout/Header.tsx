@@ -1,5 +1,6 @@
 import Link from 'next/link';
 
+import LangSwitcher from '../common/LanguageSwitcher';
 import NavLinks from '../common/NavLinks';
 import Logo from '../ui/Logo';
 import HeaderMobile from './header/HeaderMobile';
@@ -52,6 +53,7 @@ const Header = () => {
                                 <Search className='size-[18px] md:size-[20px]' />
                             </i>
                         </Button> */}
+                        <LangSwitcher />
                         <HeaderMobile />
                     </div>
                 </div>

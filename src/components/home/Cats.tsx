@@ -10,8 +10,11 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 
 import Autoplay from 'embla-carousel-autoplay';
+import { useLocale } from 'next-intl';
 
 const Cats = () => {
+    const locale = useLocale();
+
     const data = [
         {
             id: 1,
@@ -53,7 +56,8 @@ const Cats = () => {
                         <Carousel
                             opts={{
                                 align: 'start',
-                                loop: true
+                                loop: true,
+                                direction: locale === 'ar' ? 'rtl' : 'ltr'
                             }}
                             plugins={[
                                 Autoplay({
