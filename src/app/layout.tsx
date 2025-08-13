@@ -32,6 +32,7 @@ const Layout = async ({ children }: Readonly<{ children: ReactNode }>) => {
     const cookieStore = await cookies();
     const locale = (await cookieStore.get('locale')?.value) || 'en';
     const dir = (await locale) === 'ar' ? 'rtl' : 'ltr';
+    const messages = (await import(`../../messages/${locale}.json`)).default;
 
     return (
         <html suppressHydrationWarning lang={locale} dir={dir}>
@@ -52,7 +53,7 @@ const Layout = async ({ children }: Readonly<{ children: ReactNode }>) => {
             </head> */}
             <body
                 className={`${jost.variable} ${marcellus.variable} bg-background !text-foreground relative overflow-x-clip antialiased`}>
-                <AppProvider>
+                <AppProvider locale={locale} messages={messages}>
                     {children}
                     <Analytics />
                 </AppProvider>
