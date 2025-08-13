@@ -30,7 +30,7 @@ const marcellus = Marcellus({
 const Layout = ({ children }: Readonly<{ children: ReactNode }>) => {
     return (
         <html suppressHydrationWarning lang={'en'} dir={'ltr'}>
-            <head>
+            {/* <head>
                 <Script strategy='afterInteractive' src='https://www.googletagmanager.com/gtag/js?id=G-S8XQ409H2C' />
                 <Script
                     id='google-analytics'
@@ -44,7 +44,7 @@ const Layout = ({ children }: Readonly<{ children: ReactNode }>) => {
                         `
                     }}
                 />
-            </head>
+            </head> */}
             <body
                 className={`${jost.variable} ${marcellus.variable} bg-background !text-foreground relative overflow-x-clip antialiased`}>
                 <AppProvider>

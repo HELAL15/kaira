@@ -15,7 +15,7 @@ const ProductCard = ({ product, delay }: { product?: FieldValues; delay?: number
             <Card className='gap-2 border-0 bg-transparent p-0 shadow-none'>
                 <CardContent className='group relative overflow-hidden p-0'>
                     <Image
-                        src={image || product_banner || '/images/cat-item1.jpg'}
+                        src={image || '/images/cat-item1.jpg'}
                         alt={'product'}
                         width={0}
                         height={0}

@@ -15,7 +15,7 @@ const Footer = lazy(() => import('@/components/layout/Footer'));
 const AppProvider = ({ children }: { children: ReactNode }) => {
     return (
         <>
-            <ThemeProvider attribute='class'>
+            <ThemeProvider attribute='class' defaultTheme='light'>
                 <NextIntlClientProvider>
                     <ReactQueryProvider>
                         <Header />
