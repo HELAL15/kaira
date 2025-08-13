@@ -1,65 +1,33 @@
 
 
-import type { AxiosRequestConfig } from "axios";
-import { axiosInstance } from "./axiosInstance";
+const API_BASE_URL = 'https://api.jaar.cloud/api/v1';
+const TOKEN = '2573|YlpNgvEffABDyLSxjs0oqX5F4qMQj42pAcspcELU401f3550';
 
 
 
-export default class Api {
-  static async get(url: string, options?: AxiosRequestConfig & { params?: Record<string, string | undefined> }) {
-    try {
-      const res = await axiosInstance.get(url, {
-        ...options,
-        params: options?.params || {}
-      });
+export async function fetchApi( endpoint:string, options?:RequestInit) {
+  const apiOptions: RequestInit = {
+    next: { revalidate: 60 },
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${TOKEN}`,
+      ...(options?.headers || {})
+    },
+    ...options
+  };
 
-      return res.data;
-    } catch (error) {
-      console.error(`GET ${url} failed:`, error);
-      throw error;
+  try {
+    const res = await fetch(`${API_BASE_URL}${endpoint}`, apiOptions);
+
+    if (!res.ok) {
+      throw new Error(`API error: ${res.status} ${res.statusText}`);
     }
-  }
 
-  async post(url: string, data?: AxiosRequestConfig, options?: AxiosRequestConfig & { params?: Record<string, string | undefined> }) {
-    try {
-      const res = await axiosInstance.post(url, data, {
-        ...options,
-        params: options?.params || {}
-      });
+    const data = await res.json()
 
-      return res.data;
-    } catch (error) {
-      console.error(`POST ${url} failed:`, error);
-      throw error;
-    }
-  }
-
-  async put(url: string, data?: AxiosRequestConfig, options?: AxiosRequestConfig & { params?: Record<string, string | undefined> }) {
-    try {
-      const res = await axiosInstance.put(url, data, {
-        ...options,
-        params: options?.params || {}
-      });
-
-      return res.data;
-    } catch (error) {
-      console.error(`PUT ${url} failed:`, error);
-      throw error;
-    }
-  }
-
-  async delete(url: string, options?: AxiosRequestConfig & { params?: Record<string, string | undefined> }) {
-    try {
-      const res = await axiosInstance.delete(url, {
-        ...options,
-        params: options?.params || {}
-      });
-
-      return res.data;
-    } catch (error) {
-      console.error(`DELETE ${url} failed:`, error);
-      throw error;
-    }
+    return await data;
+  } catch (e) {
+    console.error('Fetch API error:', e);
+    throw e;
   }
 }
-

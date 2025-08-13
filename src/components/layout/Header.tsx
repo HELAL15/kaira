@@ -3,24 +3,15 @@ import Link from 'next/link';
 
 import NavLinks from '../common/NavLinks';
 import { Button } from '../ui/Button';
+import Logo from '../ui/Logo';
 import HeaderMobile from './header/HeaderMobile';
 import { Heart, Search, ShoppingCart, UserRound } from 'lucide-react';
 
 const Header = () => {
     return (
-        <header className='bg-background-secondary text-foreground sticky top-0 z-50 border-b border-b-white py-4'>
+        <header className='bg-background-secondary dark:bg-background text-foreground dark:border-b-gray/30 sticky top-0 z-[999] border-b border-b-white py-4'>
             <div className='container flex w-full items-center justify-between gap-6'>
-                <Link aria-label='kaira website logo' href={'/'} className='max-md:max-h-[35px]'>
-                    <Image
-                        width={0}
-                        height={0}
-                        loading='eager'
-                        priority
-                        className='h-full w-full object-contain'
-                        src={'/logo.svg'}
-                        alt='kaira logo'
-                    />
-                </Link>
+                <Logo />
 
                 <nav>
                     <ul className='flex items-center gap-6 uppercase max-lg:hidden xl:gap-12'>

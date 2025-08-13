@@ -5,6 +5,7 @@ import Link from 'next/link';
 
 import { Button } from '@/components/ui/Button';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
+import { cn } from '@/lib/utils';
 
 import Autoplay from 'embla-carousel-autoplay';
 
@@ -51,7 +52,7 @@ const Hero = () => {
                     align: 'start',
                     loop: true
                 }}>
-                <CarouselContent className='lg:h-[calc(100vh_-77px)]'>
+                <CarouselContent className='lg:h-[calc(100vh_-69px)] xl:h-[calc(100vh_-73px)]'>
                     {data.map((item) => (
                         <CarouselItem key={item.id} className='relative size-full'>
                             <Image
@@ -81,18 +82,17 @@ const Hero = () => {
                                         {item.title.split(' ').map((word, index) => (
                                             <span
                                                 key={index}
-                                                className={`font-marcellus uppercase ${
-                                                    index === 0
-                                                        ? 'text-background-secondary'
-                                                        : 'font-bold text-transparent'
-                                                }`}
+                                                className={cn(
+                                                    `!font-marcellus uppercase`,
+                                                    index === 0 ? 'text-white' : 'font-bold text-transparent'
+                                                )}
                                                 style={index === 0 ? {} : { WebkitTextStroke: '1px white' }}>
                                                 {word}{' '}
                                             </span>
                                         ))}
                                     </h1>
                                     <div className='space-y-6'>
-                                        <p className='text-background-secondary max-w-[700px] text-sm md:text-lg'>
+                                        <p className='text-background-secondary dark:text-foreground max-w-[700px] text-sm md:text-lg'>
                                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos soluta
                                             veritatis molestias nisi, sunt earum beatae suscipit? A, accusamus quam!
                                         </p>

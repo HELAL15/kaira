@@ -11,58 +11,14 @@ import RadioForm from '../ui/RadioForm';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../ui/accordion';
 import { Label } from '../ui/label';
 import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
-import { Controller, FormProvider, useForm } from 'react-hook-form';
+import { Controller, type FieldValues, FormProvider, useForm } from 'react-hook-form';
 
-const ShopFilters = () => {
+const ShopFilters = ({ filterData }: { filterData: FieldValues }) => {
     const searchParams = useSearchParams();
     const router = useRouter();
     const pathname = usePathname();
 
-    // Filter data arrays
-    const filterData = {
-        colors: [
-            { id: 'red', label: 'Red', count: 50, colorClass: 'bg-red-500' },
-            { id: 'blue', label: 'Blue', count: 32, colorClass: 'bg-blue-500' },
-            { id: 'green', label: 'Green', count: 28, colorClass: 'bg-green-500' },
-            { id: 'black', label: 'Black', count: 45, colorClass: 'bg-black' },
-            { id: 'white', label: 'White', count: 38, colorClass: 'bg-white border' }
-        ],
-        sizes: [
-            { id: 'xs', label: 'XS', count: 15 },
-            { id: 's', label: 'S', count: 25 },
-            { id: 'm', label: 'M', count: 35 },
-            { id: 'l', label: 'L', count: 30 },
-            { id: 'xl', label: 'XL', count: 20 }
-        ],
-        prices: [
-            { id: 'under-10', label: 'Less than $10', count: 12 },
-            { id: '10-20', label: '$10 - $20', count: 25 },
-            { id: '20-40', label: '$20 - $40', count: 35 },
-            { id: '40-50', label: '$40 - $50', count: 28 },
-            { id: '50-60', label: '$50 - $60', count: 18 },
-            { id: 'over-60', label: 'Over $60', count: 22 }
-        ],
-        brands: [
-            { id: 'lc-wakiki', label: 'LC Waikiki', count: 45 },
-            { id: 'balenciaga', label: 'Balenciaga', count: 12 },
-            { id: 'town-team', label: 'Town Team', count: 28 },
-            { id: 'Gucci', label: '"Gucci"', count: 33 },
-            { id: 'nike', label: 'Nike', count: 41 }
-        ],
-        availability: [
-            { id: 'available', label: 'Available', count: 180 },
-            { id: 'out-of-stock', label: 'Out of Stock', count: 25 }
-        ]
-    };
-
-    const categories = [
-        { id: '', label: 'All' },
-        { id: '109', label: 'Clothing' },
-        { id: '110', label: 'Accessories' },
-        { id: '111', label: 'Shoes' },
-        { id: '180', label: 'Bags' },
-        { id: 'electronics', label: 'Electronics' }
-    ];
+    console.log('shop filter re render');
 
     const params = new URLSearchParams(searchParams);
 
@@ -95,7 +51,14 @@ const ShopFilters = () => {
         for (const key of params.keys()) {
             params.delete(key);
         }
-        reset();
+        reset({
+            main_category_id: '',
+            color_id: '',
+            size_id: '',
+            price_id: '',
+            brand_id: '',
+            availability_id: ''
+        });
         router.push(pathname);
     };
 
@@ -118,12 +81,12 @@ const ShopFilters = () => {
                                     value={value}
                                     onValueChange={onChange}
                                     className='flex flex-col gap-2 text-lg'>
-                                    {categories?.map((cat) => (
+                                    {filterData?.categories?.map((cat: FieldValues) => (
                                         <Label
                                             key={cat.id}
                                             className={cn(
                                                 'nav-link cursor-pointer text-xl',
-                                                value === String(cat.id) ? 'text-black' : ''
+                                                value === String(cat.id) ? 'text-black dark:text-white' : ''
                                             )}>
                                             <RadioGroupItem value={String(cat.id)} className='peer sr-only' />
 
@@ -140,7 +103,7 @@ const ShopFilters = () => {
                         <h2 className='border-background-secondary border-b pb-3 text-lg uppercase md:text-xl'>
                             filter by :
                         </h2>
-                        <Accordion type='single' collapsible className='w-full' defaultValue='item-1'>
+                        <Accordion type='single' collapsible className='w-full'>
                             {/* Color Filter */}
                             <AccordionItem value='item-1'>
                                 <AccordionTrigger className='text-gray text-lg uppercase hover:no-underline'>

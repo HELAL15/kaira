@@ -1,20 +1,9 @@
 'use client';
 
 import type { ReactNode } from 'react';
-import React, { Suspense } from 'react';
+import React, { memo, useMemo } from 'react';
 
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-
-import {
-    Sheet,
-    SheetClose,
-    SheetContent,
-    SheetDescription,
-    SheetFooter,
-    SheetHeader,
-    SheetTitle,
-    SheetTrigger
-} from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 
 import { Button } from '../ui/Button';
 import ProductCard from '../ui/ProductCard';
@@ -23,13 +12,60 @@ import ShopFilters from './ShopFilters';
 import type { FieldValues } from 'react-hook-form';
 
 interface IProps {
-    products: FieldValues;
+    products?: FieldValues;
     children?: ReactNode;
 }
 
 const ShopSearchForm = ({ products, children }: IProps) => {
     const meta = products?.meta || {};
     const items = products?.data || [];
+
+    // Filter data arrays
+    const filterData = {
+        colors: [
+            { id: 'red', label: 'Red', count: 50, colorClass: 'bg-red-500' },
+            { id: 'blue', label: 'Blue', count: 32, colorClass: 'bg-blue-500' },
+            { id: 'green', label: 'Green', count: 28, colorClass: 'bg-green-500' },
+            { id: 'black', label: 'Black', count: 45, colorClass: 'bg-black' },
+            { id: 'white', label: 'White', count: 38, colorClass: 'bg-white border' }
+        ],
+        sizes: [
+            { id: 'xs', label: 'XS', count: 15 },
+            { id: 's', label: 'S', count: 25 },
+            { id: 'm', label: 'M', count: 35 },
+            { id: 'l', label: 'L', count: 30 },
+            { id: 'xl', label: 'XL', count: 20 }
+        ],
+        prices: [
+            { id: 'under-10', label: 'Less than $10', count: 12 },
+            { id: '10-20', label: '$10 - $20', count: 25 },
+            { id: '20-40', label: '$20 - $40', count: 35 },
+            { id: '40-50', label: '$40 - $50', count: 28 },
+            { id: '50-60', label: '$50 - $60', count: 18 },
+            { id: 'over-60', label: 'Over $60', count: 22 }
+        ],
+        brands: [
+            { id: 'lc-wakiki', label: 'LC Waikiki', count: 45 },
+            { id: 'balenciaga', label: 'Balenciaga', count: 12 },
+            { id: 'town-team', label: 'Town Team', count: 28 },
+            { id: 'Gucci', label: '"Gucci"', count: 33 },
+            { id: 'nike', label: 'Nike', count: 41 }
+        ],
+        availability: [
+            { id: 'available', label: 'Available', count: 180 },
+            { id: 'out-of-stock', label: 'Out of Stock', count: 25 }
+        ],
+        categories: [
+            { id: '', label: 'All' },
+            { id: '109', label: 'Clothing' },
+            { id: '110', label: 'Accessories' },
+            { id: '111', label: 'Shoes' },
+            { id: '180', label: 'Bags' },
+            { id: 'electronics', label: 'Electronics' }
+        ]
+    };
+
+    const memoizedData = useMemo(() => filterData, []);
 
     return (
         <>
@@ -49,38 +85,17 @@ const ShopSearchForm = ({ products, children }: IProps) => {
                                         </SheetHeader>
 
                                         <div className='px-4'>
-                                            <ShopFilters />
+                                            <ShopFilters filterData={memoizedData} />
                                         </div>
-
-                                        <SheetFooter>
-                                            <SheetClose asChild>
-                                                <Button variant='outline'>Close</Button>
-                                            </SheetClose>
-                                        </SheetFooter>
                                     </SheetContent>
                                 </Sheet>
                             </div>
                         </div>
                         <ul className='col-span-full grid grid-cols-2 items-start gap-4 md:grid-cols-3 lg:col-span-9'>
-                            {items.length > 0 ? (
-                                items.map((product: { [key: string]: FieldValues }) => (
-                                    <li key={product?.id as unknown as number}>
-                                        <ProductCard product={product} />
-                                    </li>
-                                ))
-                            ) : (
-                                <li className='col-span-full grid h-[400px] place-items-center'>
-                                    <p className='text-center text-gray-500'>No products found.</p>
-                                </li>
-                            )}
-                            {items.length !== 0 && (
-                                <li className='col-span-full flex items-center justify-center gap-4'>
-                                    <ProductsPagination meta={meta} />
-                                </li>
-                            )}
+                            {children}
                         </ul>
-                        <div className='sticky top-28 col-span-3 px-6 py-1 max-lg:hidden'>
-                            <ShopFilters />
+                        <div className='col-span-3 px-6 py-1 max-lg:hidden'>
+                            <ShopFilters filterData={memoizedData} />
                         </div>
                     </div>
                 </div>
@@ -89,4 +104,4 @@ const ShopSearchForm = ({ products, children }: IProps) => {
     );
 };
 
-export default ShopSearchForm;
+export default memo(ShopSearchForm);

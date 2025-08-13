@@ -8,16 +8,18 @@ import type { FieldValues } from 'react-hook-form';
 
 const ProductCard = ({ product, delay }: { product?: FieldValues; delay?: number }) => {
     const { id, title, price, image, product_banner } = product || {};
+    console.log('i rerendered');
 
     return (
         <>
             <Card className='gap-2 border-0 bg-transparent p-0 shadow-none'>
                 <CardContent className='group relative overflow-hidden p-0'>
                     <Image
-                        src={image || '/images/cat-item1.jpg'}
+                        src={image || product_banner || '/images/cat-item1.jpg'}
                         alt={'product'}
                         width={0}
                         height={0}
+                        loading='lazy'
                         sizes='100'
                         className='h-[250px] w-full object-cover duration-300 group-hover:scale-110 md:h-[390px] lg:h-[400px]'
                     />

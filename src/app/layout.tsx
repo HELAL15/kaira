@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 
 import type { Metadata } from 'next';
+import { Jost, Marcellus } from 'next/font/google';
 import Head from 'next/head';
 import Script from 'next/script';
 
@@ -14,17 +15,22 @@ export const metadata: Metadata = {
     description: 'Kaira Fashion-Store Ecommerce Website'
 };
 
+const jost = Jost({
+    subsets: ['latin'],
+    weight: ['400', '500', '700'],
+    variable: '--font-jost'
+});
+
+const marcellus = Marcellus({
+    subsets: ['latin'],
+    weight: '400',
+    variable: '--font-marcellus'
+});
+
 const Layout = ({ children }: Readonly<{ children: ReactNode }>) => {
     return (
         <html suppressHydrationWarning lang={'en'} dir={'ltr'}>
             <head>
-                <link rel='preconnect' href='https://fonts.googleapis.com' />
-                <link rel='preconnect' href='https://fonts.gstatic.com' crossOrigin='' />
-                <link
-                    href='https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Marcellus&display=swap'
-                    rel='stylesheet'
-                />
-
                 <Script strategy='afterInteractive' src='https://www.googletagmanager.com/gtag/js?id=G-S8XQ409H2C' />
                 <Script
                     id='google-analytics'
@@ -39,7 +45,8 @@ const Layout = ({ children }: Readonly<{ children: ReactNode }>) => {
                     }}
                 />
             </head>
-            <body className={`bg-background !text-foreground relative overflow-x-clip antialiased`}>
+            <body
+                className={`${jost.variable} ${marcellus.variable} bg-background !text-foreground relative overflow-x-clip antialiased`}>
                 <AppProvider>
                     {children}
                     <Analytics />

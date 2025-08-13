@@ -51,9 +51,7 @@ const SignUpNewsletter = () => {
 
                 <div className='relative z-20 container grid w-full place-items-center'>
                     <form onSubmit={handleSubmit(onSubmit)} className='w-full space-y-4 md:w-3/4 lg:w-1/2'>
-                        <h2 className='text-background mb-8 text-center text-4xl uppercase'>
-                            Sign Up for Our Newsletter
-                        </h2>
+                        <h4 className='mb-8 text-center text-4xl text-white uppercase'>Sign Up for Our Newsletter</h4>
                         <FormProvider {...form}>
                             <FormInput name='email' type='email' placeholder='your email address' />
                             <Button type='submit' variant={'dark'} className='w-full py-6'>
