@@ -1,6 +1,6 @@
-'use client';
-
 import React, { ReactNode, lazy } from 'react';
+
+import { cookies } from 'next/headers';
 
 import { ThemeProvider } from 'next-themes';
 
@@ -10,20 +10,17 @@ import Header from '@/components/layout/Header';
 import ReactQueryProvider from './ReactQueryProcider';
 import { NextIntlClientProvider } from 'next-intl';
 import NextTopLoader from 'nextjs-toploader';
-import { type FieldValues } from 'react-hook-form';
 import { Toaster } from 'sonner';
 
 const Footer = lazy(() => import('@/components/layout/Footer'));
 
-const AppProvider = ({
-    children,
-    locale,
-    messages
-}: {
-    children: ReactNode;
-    locale: string;
-    messages: FieldValues;
-}) => {
+const AppProvider = async ({ children }: { children: ReactNode }) => {
+    const cookieStore = await cookies();
+    const locale = cookieStore.get('locale')?.value || 'en';
+
+    // const locale = 'en'; // or detect from params
+    const messages = (await import(`../../messages/${locale}.json`)).default;
+
     return (
         <>
             <ThemeProvider attribute='class' defaultTheme='light'>
