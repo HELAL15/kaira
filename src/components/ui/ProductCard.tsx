@@ -22,7 +22,7 @@ const ProductCard = ({ product, delay }: { product?: FieldValues; delay?: number
                         loading='lazy'
                         decoding='async'
                         placeholder='blur'
-                        blurDataURL='/images/blur-placeholder.jpg'
+                        blurDataURL='/images/blur-placeholder.jpeg'
                         sizes='(max-width: 768px) 100vw, 300px'
                         className='h-[250px] w-full object-cover duration-300 group-hover:scale-110 md:h-[390px] lg:h-[400px]'
                     />

@@ -10,12 +10,10 @@ import AddReview from '@/components/shop/AddReview';
 import MainDetailsForm from '@/components/shop/MainDetailsForm';
 import ProductCarousel from '@/components/shop/ProductCarousel';
 import RelatedProducts from '@/components/singleProduct/RelatedProducts';
-import { Button } from '@/components/ui/Button';
 import Rate from '@/components/ui/shadcn-io/Rate';
 import { axiosInstance } from '@/lib/axiosInstance';
 
 import { AxiosError } from 'axios';
-import { Heart, Minus, Plus } from 'lucide-react';
 
 const getProducts = async (productId?: string) => {
     try {

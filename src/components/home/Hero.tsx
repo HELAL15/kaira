@@ -13,7 +13,7 @@ import { useLocale } from 'next-intl';
 const Hero = () => {
     // const url = '/images/hero4.jpg';
     const locale = useLocale();
-    console.log(locale);
+    // console.log(locale);
 
     const data = [
         {

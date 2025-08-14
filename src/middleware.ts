@@ -23,5 +23,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/((?!api|trpc|_next|_vercel|.*\\..*).*)','/profile', '/login' , '/register']
+  matcher: ['/profile', '/login' , '/register']
 };
