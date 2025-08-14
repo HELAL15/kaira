@@ -26,7 +26,12 @@ interface IProps {
 }
 
 const FormSelect = ({ name, placeholder = 'default Sorting', label, cx, description, options }: IProps) => {
-    const { control } = useFormContext();
+    const {
+        control,
+        formState: { errors }
+    } = useFormContext();
+
+    const fieldError = errors?.[name]?.message as string | undefined;
 
     return (
         <FormField
@@ -40,6 +45,7 @@ const FormSelect = ({ name, placeholder = 'default Sorting', label, cx, descript
                             <SelectTrigger
                                 className={cn(
                                     'bg-background text-foreground field-sizing-fixed w-full cursor-pointer rounded-none !py-6',
+                                    fieldError && 'border-red-500',
                                     cx
                                 )}>
                                 <SelectValue placeholder={placeholder} />
