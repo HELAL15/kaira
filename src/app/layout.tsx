@@ -2,9 +2,8 @@ import type { ReactNode } from 'react';
 
 import type { Metadata } from 'next';
 import { Jost, Marcellus } from 'next/font/google';
-import { notFound } from 'next/navigation';
+import { cookies } from 'next/headers';
 
-import { routing } from '@/i18n/routing';
 import AppProvider from '@/providers/AppProvider';
 import { Analytics } from '@vercel/analytics/next';
 
@@ -27,28 +26,22 @@ const marcellus = Marcellus({
     variable: '--font-marcellus'
 });
 
-export default async function LocaleLayout({
-    children,
-    params
-}: {
-    children: ReactNode;
-    params: { locale: 'ar' | 'en' };
-}) {
-    const { locale } = params;
-
-    if (!routing.locales.includes(locale)) {
-        notFound();
-    }
-
-    const dir = locale === 'ar' ? 'rtl' : 'ltr';
+const Layout = async ({ children }: Readonly<{ children: ReactNode }>) => {
+    const cookieStore = await cookies();
+    const locale = (await cookieStore.get('locale')?.value) || 'en';
+    const dir = (await locale) === 'ar' ? 'rtl' : 'ltr';
 
     return (
         <html suppressHydrationWarning lang={locale} dir={dir}>
             <body
-                className={`${jost.variable} ${marcellus.variable} bg-background !text-foreground relative overflow-x-clip antialiased`}>
-                <AppProvider locale={locale}>{children}</AppProvider>
-                <Analytics />
+                className={`${jost.variable} ${marcellus.variable} bg-background !text-foreground relative overflow-x-clip antialiased transition-all duration-300`}>
+                <AppProvider>
+                    {children}
+                    <Analytics />
+                </AppProvider>
             </body>
         </html>
     );
-}
+};
+
+export default Layout;

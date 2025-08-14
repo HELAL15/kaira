@@ -18,41 +18,34 @@ const Header = () => {
                     </ul>
                 </nav>
 
-                <div className='flex items-center gap-4 lg:gap-7'>
-                    <div className='flex items-center gap-2 lg:gap-5'>
+                <div className='flex items-center gap-3 lg:gap-5'>
+                    <div className='flex items-center gap-2 lg:gap-4'>
                         <Link
                             href={'/wishlist'}
                             aria-label='wishlist'
                             className='flex items-center gap-1 max-md:text-sm lg:gap-2'>
-                            {' '}
-                            <span className='block max-lg:hidden'>wishlist</span>{' '}
-                            <i className='hidden max-lg:block'>
+                            <i>
                                 <Heart size={18} />
-                            </i>{' '}
+                            </i>
                             (0)
                         </Link>
                         <Link
                             href={'/cart'}
                             aria-label='cart'
                             className='flex items-center gap-1 max-md:text-sm lg:gap-2'>
-                            <span className='block max-lg:hidden'>cart</span>{' '}
-                            <i className='hidden max-lg:block'>
+                            <i>
                                 <ShoppingCart size={18} />
-                            </i>{' '}
+                            </i>
                             (0)
                         </Link>
                     </div>
-                    <div className='flex items-center gap-3 md:gap-5'>
+                    <div className='flex items-center gap-2 md:gap-4'>
                         <Link href={'/profile'} aria-label='profile'>
                             <i>
-                                <UserRound className='size-[18px] md:size-[20px]' />
+                                <UserRound size={18} />
                             </i>
                         </Link>
-                        {/* <Button title='search' variant={'ghost'} className='p-0'>
-                            <i>
-                                <Search className='size-[18px] md:size-[20px]' />
-                            </i>
-                        </Button> */}
+
                         <LangSwitcher />
                         <HeaderMobile />
                     </div>

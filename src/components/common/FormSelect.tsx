@@ -8,6 +8,11 @@ import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessa
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { type Control, useFormContext } from 'react-hook-form';
 
+type Option = {
+    id: string;
+    title: string;
+};
+
 interface IProps {
     control?: Control;
     name: string;
@@ -17,9 +22,10 @@ interface IProps {
     type?: string;
     cx?: string;
     description?: ReactNode;
+    options?: Option[] | undefined;
 }
 
-const FormSelect = ({ name, placeholder = 'default Sorting', label, cx, description }: IProps) => {
+const FormSelect = ({ name, placeholder = 'default Sorting', label, cx, description, options }: IProps) => {
     const { control } = useFormContext();
 
     return (
@@ -31,14 +37,26 @@ const FormSelect = ({ name, placeholder = 'default Sorting', label, cx, descript
                     {label && <FormLabel>{label}</FormLabel>}
                     <FormControl>
                         <Select onValueChange={field.onChange} defaultValue={field.value} value={field.value}>
-                            <SelectTrigger className={cn('cursor-pointer border-0 shadow-none outline-0', cx)}>
+                            <SelectTrigger
+                                className={cn(
+                                    'bg-background text-foreground field-sizing-fixed w-full cursor-pointer rounded-none !py-6',
+                                    cx
+                                )}>
                                 <SelectValue placeholder={placeholder} />
                             </SelectTrigger>
                             <SelectContent>
-                                <SelectItem value='defaultSorting'>Default Sorting</SelectItem>
-                                <SelectItem value='color'>Color</SelectItem>
-                                <SelectItem value='size'>Size</SelectItem>
-                                <SelectItem value='price'>Price</SelectItem>
+                                <button className='px-4 py-1' onClick={() => field.onChange('')}>
+                                    -- Clear Selection --
+                                </button>
+                                {(options ?? []).length > 0 ? (
+                                    (options ?? []).map((option) => (
+                                        <SelectItem key={option.id} value={option.id}>
+                                            {option.title}
+                                        </SelectItem>
+                                    ))
+                                ) : (
+                                    <SelectItem value={'empty'}>select is empty</SelectItem>
+                                )}
                             </SelectContent>
                         </Select>
                     </FormControl>

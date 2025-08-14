@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import ApplyCopoun from '@/components/cart/ApplyCopoun';
 import ProductCart from '@/components/cart/ProductCart';
 import ShippingForm from '@/components/cart/ShippingForm';
@@ -71,12 +73,16 @@ const page = () => {
                                 </div>
                             </div>
                             <div className='flex flex-wrap items-center gap-4'>
-                                <Button variant={'dark'} size={'xl'}>
-                                    procceed to checkout
-                                </Button>
-                                <Button variant={'outline'} size={'xl'}>
-                                    continue shopping
-                                </Button>
+                                <Link href={'/checkout'}>
+                                    <Button variant={'dark'} size={'xl'}>
+                                        procceed to checkout
+                                    </Button>
+                                </Link>
+                                <Link href={'/shop'}>
+                                    <Button variant={'outline'} size={'xl'}>
+                                        continue shopping
+                                    </Button>
+                                </Link>
                             </div>
                         </div>
                     </div>
