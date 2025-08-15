@@ -26,7 +26,7 @@ const marcellus = Marcellus({
     variable: '--font-marcellus'
 });
 
-const Layout = async ({ children }: Readonly<{ children: ReactNode }>) => {
+const DashboardLayout = async ({ children }: Readonly<{ children: ReactNode }>) => {
     const cookieStore = await cookies();
     const locale = (await cookieStore.get('locale')?.value) || 'en';
     const dir = (await locale) === 'ar' ? 'rtl' : 'ltr';
@@ -44,4 +44,4 @@ const Layout = async ({ children }: Readonly<{ children: ReactNode }>) => {
     );
 };
 
-export default Layout;
+export default DashboardLayout;
