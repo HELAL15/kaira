@@ -14,30 +14,30 @@ import { Toaster } from 'sonner';
 
 const Footer = lazy(() => import('@/components/layout/Footer'));
 
-const AppProvider = async ({ children }: { children: ReactNode }) => {
-    const cookieStore = await cookies();
-    const locale = cookieStore.get('locale')?.value || 'en';
+const AppProvider = ({ children }: { children: ReactNode }) => {
+    // const cookieStore = await cookies();
+    // const locale = cookieStore.get('locale')?.value || 'en';
 
     // const locale = 'en'; // or detect from params
-    const messages = (await import(`../../messages/${locale}.json`)).default;
+    // const messages = (await import(`../../messages/${locale}.json`)).default;
 
     return (
         <>
             <ThemeProvider attribute='class' defaultTheme='light'>
-                <NextIntlClientProvider locale={locale} messages={messages}>
-                    <ReactQueryProvider>
-                        <Header />
-                        {children}
-                        <Footer />
-                    </ReactQueryProvider>
-                    <NextTopLoader color='#000' height={2} />
-                    <Toaster
-                        position='top-center'
-                        style={{
-                            padding: '0 !important'
-                        }}
-                    />
-                </NextIntlClientProvider>
+                {/* <NextIntlClientProvider locale={locale} messages={messages}> */}
+                <ReactQueryProvider>
+                    <Header />
+                    {children}
+                    <Footer />
+                </ReactQueryProvider>
+                <NextTopLoader color='#000' height={2} />
+                <Toaster
+                    position='top-center'
+                    style={{
+                        padding: '0 !important'
+                    }}
+                />
+                {/* </NextIntlClientProvider> */}
             </ThemeProvider>
         </>
     );

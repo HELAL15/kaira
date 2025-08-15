@@ -3,11 +3,15 @@ import type { ReactNode } from 'react';
 import type { Metadata } from 'next';
 import { Jost, Marcellus } from 'next/font/google';
 import { cookies } from 'next/headers';
+import { notFound } from 'next/navigation';
 
+import { routing } from '@/i18n/routing';
 import AppProvider from '@/providers/AppProvider';
 import { Analytics } from '@vercel/analytics/next';
 
 import 'aos/dist/aos.css';
+import { hasLocale } from 'next-intl';
+import { setRequestLocale } from 'next-intl/server';
 
 export const metadata: Metadata = {
     title: 'Kaira - home',
@@ -26,13 +30,25 @@ const marcellus = Marcellus({
     variable: '--font-marcellus'
 });
 
-const Layout = async ({ children }: Readonly<{ children: ReactNode }>) => {
-    const cookieStore = await cookies();
-    const locale = (await cookieStore.get('locale')?.value) || 'en';
-    const dir = (await locale) === 'ar' ? 'rtl' : 'ltr';
+export function generateStaticParams() {
+    return routing.locales.map((locale) => ({ locale }));
+}
+
+const Layout = async ({ children, params }: Readonly<{ children: ReactNode; params: { locale: 'ar' | 'en' } }>) => {
+    // const cookieStore = await cookies();
+    // const locale = (await cookieStore.get('locale')?.value) || 'en';
+    // const dir = (await locale) === 'ar' ? 'rtl' : 'ltr';
+
+    const { locale } = await params;
+    if (!hasLocale(routing.locales, locale)) {
+        notFound();
+    }
+
+    // Enable static rendering
+    setRequestLocale(locale);
 
     return (
-        <html suppressHydrationWarning lang={locale} dir={dir}>
+        <html suppressHydrationWarning lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
             <body
                 className={`${jost.variable} ${marcellus.variable} bg-background !text-foreground relative overflow-x-clip antialiased transition-all duration-300`}>
                 <AppProvider>

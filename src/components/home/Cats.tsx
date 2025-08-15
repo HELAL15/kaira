@@ -13,7 +13,7 @@ import Autoplay from 'embla-carousel-autoplay';
 import { useLocale } from 'next-intl';
 
 const Cats = () => {
-    const locale = useLocale();
+    // const locale = useLocale();
 
     const data = [
         {
@@ -56,8 +56,8 @@ const Cats = () => {
                         <Carousel
                             opts={{
                                 align: 'start',
-                                loop: true,
-                                direction: locale === 'ar' ? 'rtl' : 'ltr'
+                                loop: true
+                                // direction: locale === 'ar' ? 'rtl' : 'ltr'
                             }}
                             plugins={[
                                 Autoplay({
