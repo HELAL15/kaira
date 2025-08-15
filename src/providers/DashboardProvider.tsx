@@ -1,18 +1,15 @@
-import React, { ReactNode, lazy } from 'react';
+import React, { ReactNode } from 'react';
 
 import { cookies } from 'next/headers';
 
 import { ThemeProvider } from 'next-themes';
 
 import '@/app/globals.css';
-import Header from '@/components/layout/Header';
 
 import ReactQueryProvider from './ReactQueryProcider';
 import { NextIntlClientProvider } from 'next-intl';
 import NextTopLoader from 'nextjs-toploader';
 import { Toaster } from 'sonner';
-
-const Footer = lazy(() => import('@/components/layout/Footer'));
 
 const DshboardProvider = async ({ children }: { children: ReactNode }) => {
     const cookieStore = await cookies();
@@ -26,9 +23,9 @@ const DshboardProvider = async ({ children }: { children: ReactNode }) => {
             <ThemeProvider attribute='class' defaultTheme='light'>
                 <NextIntlClientProvider locale={locale} messages={messages}>
                     <ReactQueryProvider>
-                        {/* <Header /> */}
+                        <header>header</header>
                         {children}
-                        <Footer />
+                        <footer>footer</footer>
                     </ReactQueryProvider>
                     <NextTopLoader color='#000' height={2} />
                     <Toaster
