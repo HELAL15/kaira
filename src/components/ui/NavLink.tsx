@@ -14,7 +14,16 @@ interface IProps {
 
 const NavLink = ({ href, title }: IProps) => {
     const pathname = usePathname();
-    const isActive = pathname === href;
+    // Remove locale prefix and normalize empty to "/"
+    const normalizePath = (path: string) => {
+        const withoutLocale = path.replace(/^\/(ar|en)(?=\/|$)/, '');
+        return withoutLocale === '' ? '/' : withoutLocale;
+    };
+
+    const currentPath = normalizePath(pathname);
+    const targetPath = normalizePath(href);
+
+    const isActive = currentPath === targetPath || currentPath.startsWith(`${targetPath}/`);
     const t = useTranslations('nav');
 
     const router = useRouter();

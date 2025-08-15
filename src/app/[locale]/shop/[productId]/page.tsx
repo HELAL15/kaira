@@ -14,10 +14,16 @@ import Rate from '@/components/ui/shadcn-io/Rate';
 import { axiosInstance } from '@/lib/axiosInstance';
 
 import { AxiosError } from 'axios';
+import { getLocale } from 'next-intl/server';
 
 const getProducts = async (productId?: string) => {
+    const locale = await getLocale();
     try {
-        const data = await axiosInstance.get(`/products/${productId}`);
+        const data = await axiosInstance.get(`/products/${productId}`, {
+            headers: {
+                Lang: locale
+            }
+        });
 
         return data.data;
     } catch (error) {
