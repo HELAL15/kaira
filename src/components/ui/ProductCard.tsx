@@ -17,13 +17,13 @@ const ProductCard = ({ product, delay }: { product?: FieldValues; delay?: number
                     <Image
                         src={image || product_banner || '/images/cat-item1.jpg'}
                         alt='product'
-                        width={300}
-                        height={300}
+                        width={100}
+                        height={100}
                         loading='lazy'
                         decoding='async'
                         placeholder='blur'
                         blurDataURL='/images/blur-placeholder.jpeg'
-                        sizes='(max-width: 768px) 100vw, 300px'
+                        sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 300px'
                         className='h-[250px] w-full object-cover duration-300 group-hover:scale-110 md:h-[390px] lg:h-[400px]'
                     />
 
