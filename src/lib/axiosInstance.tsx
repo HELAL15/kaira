@@ -1,15 +1,12 @@
 import axios from 'axios';
 
 const baseUrl = process.env.BASE_URL || 'https://api.jaar.cloud/api/v1';
-const lang = 'en';
 
 export const axiosInstance = axios.create({
     baseURL: baseUrl,
     headers: {
         'Content-Type': 'application/json',
-        accept: 'application/json',
-        'accept-language': lang,
-        Lang: lang
+        accept: 'application/json'
     }
 });
 
@@ -22,9 +19,12 @@ axiosInstance.interceptors.request.use(
                 config.headers.Authorization = `Bearer ${token}`;
             }
 
-            if (lang) {
-                config.headers['Accept-Language'] = lang;
-                config.headers['Lang'] = lang;
+            if (!config.headers['Lang']) {
+                config.headers['Lang'] = 'ar';
+                config.headers['accept-language'] = 'ar';
+            } else {
+                // Ensure accept-language matches Lang if provided
+                config.headers['accept-language'] = config.headers['Lang'];
             }
 
             return config;

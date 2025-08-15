@@ -3,15 +3,20 @@ import { Metadata } from 'next';
 import { axiosInstance } from '@/lib/axiosInstance';
 
 import ShopPresentational from './ShopPresentational';
+import { getLocale } from 'next-intl/server';
 
 export const metadata: Metadata = {
     title: 'shop - kaira'
 };
 
 const getData = async (params?: Record<string, string | number>) => {
+    const locale = await getLocale();
     try {
         const data = await axiosInstance.get(`/products`, {
-            params: params
+            params: params,
+            headers: {
+                Lang: locale
+            }
         });
 
         return data;

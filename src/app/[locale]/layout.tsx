@@ -11,7 +11,7 @@ import { Analytics } from '@vercel/analytics/next';
 
 import 'aos/dist/aos.css';
 import { hasLocale } from 'next-intl';
-import { setRequestLocale } from 'next-intl/server';
+import { getMessages, setRequestLocale } from 'next-intl/server';
 
 export const metadata: Metadata = {
     title: 'Kaira - home',

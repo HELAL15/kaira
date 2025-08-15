@@ -8,13 +8,13 @@ import '@/app/globals.css';
 import Header from '@/components/layout/Header';
 
 import ReactQueryProvider from './ReactQueryProcider';
-import { NextIntlClientProvider } from 'next-intl';
+import { NextIntlClientProvider, useMessages } from 'next-intl';
 import NextTopLoader from 'nextjs-toploader';
 import { Toaster } from 'sonner';
 
 const Footer = lazy(() => import('@/components/layout/Footer'));
 
-const AppProvider = ({ children }: { children: ReactNode }) => {
+const AppProvider = ({ children }: { children: ReactNode; locale?: string }) => {
     // const cookieStore = await cookies();
     // const locale = cookieStore.get('locale')?.value || 'en';
 
@@ -24,20 +24,20 @@ const AppProvider = ({ children }: { children: ReactNode }) => {
     return (
         <>
             <ThemeProvider attribute='class' defaultTheme='light'>
-                {/* <NextIntlClientProvider locale={locale} messages={messages}> */}
-                <ReactQueryProvider>
-                    <Header />
-                    {children}
-                    <Footer />
-                </ReactQueryProvider>
-                <NextTopLoader color='#000' height={2} />
-                <Toaster
-                    position='top-center'
-                    style={{
-                        padding: '0 !important'
-                    }}
-                />
-                {/* </NextIntlClientProvider> */}
+                <NextIntlClientProvider>
+                    <ReactQueryProvider>
+                        <Header />
+                        {children}
+                        <Footer />
+                    </ReactQueryProvider>
+                    <NextTopLoader color='#000' height={2} />
+                    <Toaster
+                        position='top-center'
+                        style={{
+                            padding: '0 !important'
+                        }}
+                    />
+                </NextIntlClientProvider>
             </ThemeProvider>
         </>
     );

@@ -12,7 +12,7 @@ import { useLocale } from 'next-intl';
 
 const Hero = () => {
     // const url = '/images/hero4.jpg';
-    // const locale = useLocale();
+    const locale = useLocale();
     // console.log(locale);
 
     const data = [
@@ -53,8 +53,8 @@ const Hero = () => {
                 ]}
                 opts={{
                     align: 'start',
-                    loop: true
-                    // direction: locale === 'ar' ? 'rtl' : 'ltr'
+                    loop: true,
+                    direction: locale === 'ar' ? 'rtl' : 'ltr'
                 }}>
                 <CarouselContent className='lg:h-[calc(100vh_-69px)] xl:h-[calc(100vh_-73px)]'>
                     {data.map((item) => (

@@ -6,6 +6,7 @@ import Image from 'next/image';
 
 import { Carousel, type CarouselApi, CarouselContent, CarouselItem } from '../ui/carousel';
 import Autoplay from 'embla-carousel-autoplay';
+import { useLocale } from 'next-intl';
 import type { FieldValues } from 'react-hook-form';
 
 const ProductCarousel = ({ data }: FieldValues) => {
@@ -13,6 +14,8 @@ const ProductCarousel = ({ data }: FieldValues) => {
     const [api, setApi] = useState<CarouselApi | null>(null);
 
     const slides = data?.data?.color_images || [];
+
+    const locale = useLocale();
 
     return (
         <>
@@ -46,7 +49,8 @@ const ProductCarousel = ({ data }: FieldValues) => {
                         <Carousel
                             opts={{
                                 align: 'start',
-                                loop: true
+                                loop: true,
+                                direction: locale === 'ar' ? 'rtl' : 'ltr'
                             }}
                             plugins={[
                                 Autoplay({

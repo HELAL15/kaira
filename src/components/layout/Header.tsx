@@ -46,7 +46,7 @@ const Header = () => {
                             </i>
                         </Link>
 
-                        {/* <LangSwitcher /> */}
+                        <LangSwitcher />
                         <HeaderMobile />
                     </div>
                 </div>
