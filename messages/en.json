@@ -13,6 +13,11 @@
     "faqs": "FAQs",
     "contact": "Contact",
     "login": "Login",
-    "register": "Register"
+    "register": "Register",
+    "profile":"profile",
+    "orders":"orders",
+    "history":"orders history",
+    "addresses":"addresses",
+    "password":"password"
   }
 }

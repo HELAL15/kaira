@@ -47,20 +47,20 @@ export function middleware(request: NextRequest) {
   const token = request.cookies.get('token')?.value;
 
   // Protect /profile from unauthenticated access
-  if (!token && request.nextUrl.pathname.includes('/profile')) {
-    const loginUrl = new URL('/login', request.url);
-    loginUrl.searchParams.set('redirect', request.nextUrl.pathname);
-    return NextResponse.redirect(loginUrl);
-  }
+  // if (!token && request.nextUrl.pathname.includes('/profile')) {
+  //   const loginUrl = new URL('/login', request.url);
+  //   loginUrl.searchParams.set('redirect', request.nextUrl.pathname);
+  //   return NextResponse.redirect(loginUrl);
+  // }
 
   // Redirect authenticated users away from /login or /register
-  if (
-    token &&
-    (request.nextUrl.pathname.includes('/login') ||
-      request.nextUrl.pathname.includes('/register'))
-  ) {
-    return NextResponse.redirect(new URL('/', request.url));
-  }
+  // if (
+  //   token &&
+  //   (request.nextUrl.pathname.includes('/login') ||
+  //     request.nextUrl.pathname.includes('/register'))
+  // ) {
+  //   return NextResponse.redirect(new URL('/', request.url));
+  // }
 
   // If intl middleware made a response (like headers), merge it
   return intlResponse || NextResponse.next();

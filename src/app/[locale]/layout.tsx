@@ -2,16 +2,13 @@ import type { ReactNode } from 'react';
 
 import type { Metadata } from 'next';
 import { Jost, Marcellus } from 'next/font/google';
-import { cookies } from 'next/headers';
-import { notFound } from 'next/navigation';
 
 import { routing } from '@/i18n/routing';
 import AppProvider from '@/providers/AppProvider';
 import { Analytics } from '@vercel/analytics/next';
 
 import 'aos/dist/aos.css';
-import { hasLocale } from 'next-intl';
-import { getMessages, setRequestLocale } from 'next-intl/server';
+import { setRequestLocale } from 'next-intl/server';
 
 export const metadata: Metadata = {
     title: 'Kaira - home',
@@ -40,9 +37,10 @@ const Layout = async ({ children, params }: Readonly<{ children: ReactNode; para
     // const dir = (await locale) === 'ar' ? 'rtl' : 'ltr';
 
     const { locale } = await params;
-    if (!hasLocale(routing.locales, locale)) {
-        notFound();
-    }
+
+    // if (!hasLocale(routing.locales, locale)) {
+    //     notFound();
+    // }
 
     // Enable static rendering
     setRequestLocale(locale);

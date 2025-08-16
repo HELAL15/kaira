@@ -23,6 +23,7 @@ const Header = () => {
                         <Link
                             href={'/wishlist'}
                             aria-label='wishlist'
+                            title='wishlist'
                             className='flex items-center gap-1 max-md:text-sm lg:gap-2'>
                             <i>
                                 <Heart size={18} />
@@ -32,6 +33,7 @@ const Header = () => {
                         <Link
                             href={'/cart'}
                             aria-label='cart'
+                            title='cart'
                             className='flex items-center gap-1 max-md:text-sm lg:gap-2'>
                             <i>
                                 <ShoppingCart size={18} />
@@ -40,7 +42,7 @@ const Header = () => {
                         </Link>
                     </div>
                     <div className='flex items-center gap-2 md:gap-4'>
-                        <Link href={'/profile'} aria-label='profile'>
+                        <Link title='profile' href={'/profile'} aria-label='profile'>
                             <i>
                                 <UserRound size={18} />
                             </i>

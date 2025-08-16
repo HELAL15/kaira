@@ -2,6 +2,8 @@ import React from 'react';
 
 import { Metadata } from 'next';
 
+import ProfileForm from '@/components/profile/ProfileForm';
+
 export const metadata: Metadata = {
     title: 'profile - kaira'
 };
@@ -9,7 +11,7 @@ export const metadata: Metadata = {
 const page = () => {
     return (
         <>
-            <main>profile main page</main>
+            <ProfileForm />
         </>
     );
 };

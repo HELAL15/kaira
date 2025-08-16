@@ -8,7 +8,6 @@ import type { FieldValues } from 'react-hook-form';
 
 const ProductCard = ({ product, delay }: { product?: FieldValues; delay?: number }) => {
     const { id, title, price, image, product_banner } = product || {};
-    console.log('i rerendered');
 
     return (
         <>
