@@ -3,7 +3,6 @@ import React, { lazy } from 'react';
 import { Metadata } from 'next';
 
 import AboutSection from '@/components/about/AboutSection';
-import AnimateAOS from '@/components/common/AnimateAOS';
 import SectionHeading from '@/components/common/SectionHeading';
 import SignUpNewsletter from '@/components/common/SignUpNewsletter';
 
@@ -20,33 +19,32 @@ const page = () => {
         <>
             <main className='overflow-hidden'>
                 <SectionHeading title='about us' />
-                <AnimateAOS>
-                    <Proccess />
 
-                    <AboutSection
-                        order={2}
-                        img='/images/hero3.jpg'
-                        title='The beginning of our journey'
-                        desc=' The beginning of our journey vel tellus Turpis purus, gravida orci, fringilla a.
+                <Proccess />
+
+                <AboutSection
+                    order={2}
+                    img='/images/hero3.jpg'
+                    title='The beginning of our journey'
+                    desc=' The beginning of our journey vel tellus Turpis purus, gravida orci, fringilla a.
                                         Ac sed eu fringilla odio mi. Consequat pharetra at magna imperdiet cursus ac
                                         faucibus sit libero. Ultricies quam nunc, lorem sit lorem urna, pretium aliquam
                                         ut. In vel, quis donec dolor id in. Pulvinar commodo mollis diam sed facilisis
                                         at magna imperdiet cursus ac faucibus sit libero.'
-                    />
-                    <AboutSection
-                        order={1}
-                        img='/images/hero4.jpg'
-                        title='Who are we?'
-                        desc=' We are nunc, lorem sit lorem urna, pretium aliquam ut. In vel, quis donec dolor
+                />
+                <AboutSection
+                    order={1}
+                    img='/images/hero4.jpg'
+                    title='Who are we?'
+                    desc=' We are nunc, lorem sit lorem urna, pretium aliquam ut. In vel, quis donec dolor
                                         id in. Pulvinar commodo mollis diam sed facilisis at magna imperdiet cursus ac
                                         faucibus sit libero. Dignissim lacus, turpis ut suspendisse vel tellus. Turpis
                                         purus, gravida orci, fringilla a. Ac sed eu fringilla odio mi. Consequat
                                         pharetra at magna imperdiet cursus ac faucibus sit libero.'
-                    />
-                    <Story />
-                    <BlogSection />
-                    <SignUpNewsletter />
-                </AnimateAOS>
+                />
+                <Story />
+                <BlogSection />
+                <SignUpNewsletter />
             </main>
         </>
     );

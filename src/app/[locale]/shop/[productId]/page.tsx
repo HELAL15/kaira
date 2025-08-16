@@ -4,7 +4,6 @@ import { Metadata } from 'next';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
-import AnimateAOS from '@/components/common/AnimateAOS';
 import SignUpNewsletter from '@/components/common/SignUpNewsletter';
 import AddReview from '@/components/shop/AddReview';
 import MainDetailsForm from '@/components/shop/MainDetailsForm';
@@ -192,9 +191,8 @@ const page = async ({ params }: { params?: { productId?: number } }) => {
                     </div>
                 </section>
                 <RelatedProducts />
-                <AnimateAOS>
-                    <SignUpNewsletter />
-                </AnimateAOS>
+
+                <SignUpNewsletter />
             </main>
         </>
     );

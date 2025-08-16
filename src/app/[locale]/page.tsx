@@ -2,7 +2,6 @@ import { lazy } from 'react';
 
 import { Metadata } from 'next';
 
-import AnimateAOS from '@/components/common/AnimateAOS';
 import SignUpNewsletter from '@/components/common/SignUpNewsletter';
 
 import Hero from '../../components/home/Hero';
@@ -30,19 +29,18 @@ const Page = () => {
         <>
             <main className='overflow-hidden'>
                 <Hero />
-                <AnimateAOS>
-                    <Proccess />
-                    <Cats />
-                    <NewArrivals />
 
-                    <BestSelling />
+                <Proccess />
+                <Cats />
+                <NewArrivals />
 
-                    <Story />
+                <BestSelling />
 
-                    <ProductsSection />
-                    <SignUpNewsletter />
-                    <YouMayLike />
-                </AnimateAOS>
+                <Story />
+
+                <ProductsSection />
+                <SignUpNewsletter />
+                <YouMayLike />
             </main>
         </>
     );

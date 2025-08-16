@@ -49,7 +49,7 @@ const Layout = async ({ children, params }: Readonly<{ children: ReactNode; para
         <html suppressHydrationWarning lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
             <body
                 className={`${jost.variable} ${marcellus.variable} bg-background !text-foreground relative overflow-x-clip antialiased transition-all duration-300`}>
-                <AppProvider>
+                <AppProvider locale={locale}>
                     {children}
                     <Analytics />
                 </AppProvider>
