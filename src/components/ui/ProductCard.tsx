@@ -35,11 +35,13 @@ const ProductCard = ({ product, delay }: { product?: FieldValues; delay?: number
                                 <Heart />
                             </i>
                         </Button>
-                        <Button title='watch' className='m-0 size-10 rounded-full'>
-                            <i>
-                                <Eye />
-                            </i>
-                        </Button>
+                        <Link href={`/shop/${id}`}>
+                            <Button title='watch' className='m-0 size-10 rounded-full'>
+                                <i>
+                                    <Eye />
+                                </i>
+                            </Button>
+                        </Link>
                     </div>
                 </CardContent>
                 <CardFooter className='m-0 flex flex-col items-start gap-2 p-0'>

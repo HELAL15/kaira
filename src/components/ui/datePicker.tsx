@@ -33,7 +33,6 @@ export function DateBicker({ name, label, placeholder }: IProps) {
             name={name}
             control={control}
             render={({ field }) => {
-                // لو عندنا قيمة محفوظة كنص، نرجع Date object للـ Calendar
                 const selectedDate = field.value ? parse(field.value, 'dd/MM/yyyy', new Date()) : undefined;
 
                 return (
@@ -66,7 +65,7 @@ export function DateBicker({ name, label, placeholder }: IProps) {
                                     onSelect={(date) => {
                                         if (date) {
                                             const formatted = format(date, 'dd/MM/yyyy');
-                                            field.onChange(formatted); // خزّن كنص
+                                            field.onChange(formatted);
                                         }
                                         setOpen(false);
                                     }}

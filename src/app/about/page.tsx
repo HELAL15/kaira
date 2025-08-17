@@ -6,9 +6,9 @@ import AboutSection from '@/components/about/AboutSection';
 import SectionHeading from '@/components/common/SectionHeading';
 import SignUpNewsletter from '@/components/common/SignUpNewsletter';
 
-const Story = lazy(() => import('../../../components/home/Story'));
-const Proccess = lazy(() => import('../../../components/home/Proccess'));
-const BlogSection = lazy(() => import('../../../components/common/BlogSection'));
+const Story = lazy(() => import('../../components/home/Story'));
+const Proccess = lazy(() => import('../../components/home/Proccess'));
+const BlogSection = lazy(() => import('../../components/common/BlogSection'));
 
 export const metadata: Metadata = {
     title: 'about - kaira'

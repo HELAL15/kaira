@@ -1,5 +1,7 @@
 import React, { ReactNode, lazy } from 'react';
 
+import { cookies } from 'next/headers';
+
 import { ThemeProvider } from 'next-themes';
 
 import '@/app/globals.css';
@@ -13,22 +15,22 @@ import { Toaster } from 'sonner';
 
 const Footer = lazy(() => import('@/components/layout/Footer'));
 
-const AppProvider = ({ children, locale }: { children: ReactNode; locale?: string }) => {
-    // const cookieStore = await cookies();
-    // const locale = cookieStore.get('locale')?.value || 'en';
+const AppProvider = async ({ children }: { children: ReactNode }) => {
+    const cookieStore = await cookies();
+    const locale = (await cookieStore.get('locale')?.value) || 'en';
 
     // const locale = 'en'; // or detect from params
-    // const messages = (await import(`../../messages/${locale}.json`)).default;
+    const messages = (await import(`../../messages/${locale}.json`)).default;
 
     return (
         <>
             <ThemeProvider attribute='class' defaultTheme='light'>
-                <NextIntlClientProvider key={locale} locale={locale}>
+                <NextIntlClientProvider locale={locale} messages={messages}>
                     <ReactQueryProvider>
-                        <AOSProvider />
                         <Header />
                         {children}
                         <Footer />
+                        <AOSProvider />
                     </ReactQueryProvider>
                     <NextTopLoader color='#000' height={2} />
                     <Toaster

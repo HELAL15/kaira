@@ -8,17 +8,19 @@ import SectionHeading from '@/components/common/SectionHeading';
 import { Button } from '@/components/ui/Button';
 import NavLink from '@/components/ui/NavLink';
 
+import { LogOut } from 'lucide-react';
+
 const template = ({ children }: { children: ReactNode }) => {
     const profileLinks = [
         { id: 1, href: '/profile', title: 'profile' },
         { id: 2, href: '/profile/password', title: 'password' },
-        { id: 3, href: '/profile/orders', title: 'orders' },
-        { id: 4, href: '/profile/addresses', title: 'addresses' }
+        { id: 3, href: '/profile/orders', title: 'orders' }
+        // { id: 4, href: '/profile/addresses', title: 'addresses' }
     ];
 
     const customStyle = {
         active: 'border-foreground text-foreground',
-        default: ' border-background-secondary'
+        default: 'dark:border-white/30 border-background-secondary'
     };
 
     const pathname = usePathname();
@@ -37,11 +39,14 @@ const template = ({ children }: { children: ReactNode }) => {
                                     href={item.href}
                                     title={item.title}
                                     customStyle={customStyle}
-                                    cx='w-full border text-lg durartion-300 hover:border-gray before:hidden after:hidden p-4'
+                                    cx='w-full border text-lg duration-300 hover:border-gray before:hidden after:hidden p-4'
                                 />
                             ))}
                             <Button size={'xl'} variant={'ghost'} className='text-red-500 hover:text-red-500'>
                                 logout
+                                <i>
+                                    <LogOut />
+                                </i>
                             </Button>
                         </aside>
                         <main className='col-span-full px-4 md:col-span-9'>{children}</main>

@@ -9,7 +9,8 @@ export default function AOSProvider() {
     useEffect(() => {
         AOS.init({
             duration: 800,
-            once: false
+            once: false,
+            startEvent: 'DOMContentLoaded'
         });
     }, []);
 
