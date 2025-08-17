@@ -8,6 +8,7 @@ import { Button } from '../ui/Button';
 import { Label } from '../ui/label';
 import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
 import { Heart, Minus, Plus } from 'lucide-react';
+import { useLocale } from 'next-intl';
 import { Controller, type FieldValues, FormProvider, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
@@ -76,6 +77,10 @@ const MainDetailsForm = ({ data }: IProps) => {
         setCart((prev) => !prev);
     });
 
+    const locale = useLocale();
+
+    const dir = locale === 'ar' ? 'rtl' : 'ltr';
+
     return (
         <>
             <FormProvider {...form}>
@@ -87,6 +92,7 @@ const MainDetailsForm = ({ data }: IProps) => {
                             control={control}
                             render={({ field }) => (
                                 <RadioGroup
+                                    dir={dir}
                                     value={field.value}
                                     onValueChange={field.onChange}
                                     className='flex items-center'>
@@ -126,6 +132,7 @@ const MainDetailsForm = ({ data }: IProps) => {
                             control={control}
                             render={({ field }) => (
                                 <RadioGroup
+                                    dir={dir}
                                     value={field.value}
                                     onValueChange={field.onChange}
                                     className='flex items-center'>
