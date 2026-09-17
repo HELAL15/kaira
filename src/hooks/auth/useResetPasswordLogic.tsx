@@ -1,9 +1,8 @@
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@/i18n/navigation';
 
 import useCookie from '@/hooks/useCookies';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import usePost from '../usePost';
 import { useForm } from 'react-hook-form';
 import type { FieldValues } from 'react-hook-form';
 import * as z from 'zod';
@@ -43,17 +42,10 @@ export function useResetPasswordLogic() {
         router.push('/');
     };
 
-    const { mutate, isPending } = usePost({
-        endpoint: 'admin/login',
-        onSuccess(data) {
-            successAction(data);
-        }
-    });
-
     const onSubmit = async (data: FieldValues) => {
         // mutate(data);
         console.log(data);
     };
 
-    return { form, onSubmit, isPending };
+    return { form, onSubmit };
 }

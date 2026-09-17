@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Image from 'next/image';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 
 import { cn } from '@/lib/utils';
 
@@ -51,11 +51,11 @@ const BlogCard = ({ blog = {}, variant = 'lg' }: BlogCardProps) => {
         <>
             <Link href={`/blog/${blog.id}`} className='card aos init space-y-4' data-aos='fade-in'>
                 <Image
-                    src={img as string}
+                    src={img}
                     alt='Blog Image'
                     width={0}
                     height={550}
-                    loading='lazy'
+                    loading='eager'
                     draggable='false'
                     sizes='100vw'
                     className={cn('w-full object-cover', variants[variant]?.img)}

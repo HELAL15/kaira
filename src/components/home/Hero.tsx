@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 
 import { Button } from '@/components/ui/Button';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
@@ -45,7 +45,7 @@ const Hero = () => {
     return (
         <>
             <Carousel
-                className='relative w-full max-lg:min-h-[250px]'
+                className='relative w-full max-lg:min-h-62.5'
                 plugins={[
                     Autoplay({
                         delay: 4000
@@ -56,14 +56,14 @@ const Hero = () => {
                     loop: true,
                     direction: locale === 'ar' ? 'rtl' : 'ltr'
                 }}>
-                <CarouselContent className='lg:h-[calc(100vh_-69px)] xl:h-[calc(100vh_-73px)]'>
+                <CarouselContent className='lg:h-[calc(100vh-69px)] xl:h-[calc(100vh-73px)]'>
                     {data.map((item) => (
                         <CarouselItem key={item.id} className='relative size-full'>
                             <Image
                                 src={item.img as string}
                                 alt='Hero'
-                                // width={0}
-                                // height={0}
+                                width={0}
+                                height={0}
                                 fill
                                 sizes='100vw'
                                 priority
@@ -87,7 +87,7 @@ const Hero = () => {
                                             <span
                                                 key={index}
                                                 className={cn(
-                                                    `!font-marcellus uppercase`,
+                                                    `font-marcellus! uppercase`,
                                                     index === 0 ? 'text-white' : 'font-bold text-transparent'
                                                 )}
                                                 style={index === 0 ? {} : { WebkitTextStroke: '1px white' }}>
@@ -96,7 +96,7 @@ const Hero = () => {
                                         ))}
                                     </h1>
                                     <div className='space-y-6'>
-                                        <p className='text-background-secondary dark:text-foreground max-w-[700px] text-sm md:text-lg'>
+                                        <p className='text-background-secondary dark:text-foreground max-w-175 text-sm md:text-lg'>
                                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos soluta
                                             veritatis molestias nisi, sunt earum beatae suscipit? A, accusamus quam!
                                         </p>

@@ -3,8 +3,7 @@
 import React, { useEffect, useState } from 'react';
 
 import Image from 'next/image';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { Link, usePathname } from '@/i18n/navigation';
 
 import NavLinks from '@/components/common/NavLinks';
 import { Button } from '@/components/ui/Button';

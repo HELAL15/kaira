@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 
 import LangSwitcher from '../common/LanguageSwitcher';
 import NavLinks from '../common/NavLinks';

@@ -1,56 +1,7 @@
-import type { ReactNode } from 'react';
+// Since we have a root `not-found.tsx` page, a layout file
+import React from 'react';
 
-import type { Metadata } from 'next';
-import { Jost, Marcellus } from 'next/font/google';
-import { cookies } from 'next/headers';
-
-import AppProvider from '@/providers/AppProvider';
-import { Analytics } from '@vercel/analytics/next';
-
-import 'aos/dist/aos.css';
-
-export const metadata: Metadata = {
-    title: 'Kaira - home',
-    description: 'Kaira Fashion-Store Ecommerce Website'
-};
-
-const jost = Jost({
-    subsets: ['latin'],
-    weight: ['400', '500', '700'],
-    variable: '--font-jost'
-});
-
-const marcellus = Marcellus({
-    subsets: ['latin'],
-    weight: '400',
-    variable: '--font-marcellus'
-});
-
-const Layout = async ({ children }: Readonly<{ children: ReactNode }>) => {
-    const cookieStore = await cookies();
-    const locale = (await cookieStore.get('locale')?.value) || 'en';
-    const dir = (await locale) === 'ar' ? 'rtl' : 'ltr';
-
-    // const { locale } = await params;
-
-    // if (!hasLocale(routing.locales, locale)) {
-    //     notFound();
-    // }
-
-    // Enable static rendering
-    // setRequestLocale(locale);
-
-    return (
-        <html suppressHydrationWarning lang={locale} dir={dir}>
-            <body
-                className={`${jost.variable} ${marcellus.variable} bg-background !text-foreground relative overflow-x-clip antialiased transition-all duration-300`}>
-                <AppProvider>
-                    {children}
-                    <Analytics />
-                </AppProvider>
-            </body>
-        </html>
-    );
-};
-
-export default Layout;
+// is required, even if it's just passing children through.
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+    return children;
+}
